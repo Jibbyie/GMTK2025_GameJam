@@ -5,7 +5,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     private Rigidbody2D playerRB;
     private float horizontalInput;
-    private float verticalInput;
 
     private void Awake()
     {
@@ -13,8 +12,17 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Move();
+    }
+
+    public void SetWalkSpeed(float newSpeed)
+    {
+        walkSpeed = newSpeed;
+    }
+
+    public void Move()
+    {
         horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
 
         playerRB.linearVelocity = new Vector2(horizontalInput * walkSpeed, playerRB.linearVelocity.y);
     }

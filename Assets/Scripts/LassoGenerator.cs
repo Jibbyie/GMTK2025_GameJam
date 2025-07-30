@@ -14,12 +14,12 @@ public class LassoGenerator : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameObject newLasso = Instantiate(lassoPrefab);
-
             activeLasso = newLasso.GetComponent<Lasso>();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
+
             DetectLoop();
             activeLasso = null;
         }
@@ -41,6 +41,8 @@ public class LassoGenerator : MonoBehaviour
             loopClosed = true;
             if (loopClosed)
             {
+                Debug.Log("Closed loop detected!");
+
                 DetectableObject[] objList = FindObjectsByType<DetectableObject>(FindObjectsSortMode.None);
                 foreach (DetectableObject obj in objList)
                 {
@@ -52,13 +54,13 @@ public class LassoGenerator : MonoBehaviour
                         obj.OnDetected();
                     }
                 }
-                Debug.Log("Closed Loop");
-                Destroy(activeLasso.gameObject, 2f);
+                Destroy(activeLasso.gameObject, 1f);
                 loopClosed = false;
             }
         }
         else
         {
+            Debug.Log("Not a closed loop - destroying immediately");
             Destroy(activeLasso.gameObject);   
         }
     }
