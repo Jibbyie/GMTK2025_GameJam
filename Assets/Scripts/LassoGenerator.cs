@@ -41,15 +41,15 @@ public class LassoGenerator : MonoBehaviour
             loopClosed = true;
             if (loopClosed)
             {
-                GameObject[] squares = GameObject.FindGameObjectsWithTag("Square");
-                foreach (GameObject square in squares)
+                DetectableObject[] objList = FindObjectsByType<DetectableObject>(FindObjectsSortMode.None);
+                foreach (DetectableObject obj in objList)
                 {
-                    Vector2 position = square.transform.position;
+                    Vector2 position = obj.transform.position;
 
                     // Ray cast check
                     if (IsPointInPolygon(position, activeLasso.GetPoints()))
                     {
-                        Debug.Log("Found square inside!");
+                        obj.OnDetected();
                     }
                 }
                 Debug.Log("Closed Loop");
