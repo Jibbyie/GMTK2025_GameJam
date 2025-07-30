@@ -5,6 +5,7 @@ public class PlayerDetectable : DetectableObject
     private float boostSpeed = 10f;
     private bool isBoosted;
     private PlayerMovement playerMovement;
+
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -14,18 +15,23 @@ public class PlayerDetectable : DetectableObject
     {
         if (playerMovement != null)
         {
-            if(!isBoosted)
-            {
-                playerMovement.SetWalkSpeed(boostSpeed);
-                isBoosted = true;
-                Debug.Log("Boosted!");
-            }
-            else if(isBoosted)
-            {
-                playerMovement.SetWalkSpeed(5f);
-                isBoosted = false;
-                Debug.Log("Not boosted!");
-            }
+            BoostSpeed();
+        }
+    }
+
+    private void BoostSpeed()
+    {
+        if (!isBoosted)
+        {
+            playerMovement.SetWalkSpeed(boostSpeed);
+            isBoosted = true;
+            Debug.Log("Player speed set to boosted.");
+        }
+        else if (isBoosted)
+        {
+            Debug.Log("Player speed set to normal.");
+            playerMovement.SetWalkSpeed(5f);
+            isBoosted = false;
         }
     }
 }

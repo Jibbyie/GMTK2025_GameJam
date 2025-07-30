@@ -35,22 +35,28 @@ public class LassoGenerator : MonoBehaviour
 
     void DetectLoop()
     {
+        // If the first and last points are close to each other
+        // And there are enough points in the line
         if (Vector2.Distance(activeLasso.GetPoints().First(), activeLasso.GetPoints().Last()) < .25f
             && activeLasso.GetPoints().Count > 15)
         {
             loopClosed = true;
-            if (loopClosed)
+            if (loopClosed) // if we detect a closed loop
             {
                 Debug.Log("Closed loop detected!");
 
+                // Find every object with a detectable tag
                 DetectableObject[] objList = FindObjectsByType<DetectableObject>(FindObjectsSortMode.None);
                 foreach (DetectableObject obj in objList)
                 {
+                    // Pass in the detectable objects position
                     Vector2 position = obj.transform.position;
 
                     // Ray cast check
                     if (IsPointInPolygon(position, activeLasso.GetPoints()))
                     {
+                        // Call the virtual function on this detected object
+                        // i.e., boost the player's speed
                         obj.OnDetected();
                     }
                 }
