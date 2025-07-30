@@ -53,8 +53,13 @@ public class LassoGenerator : MonoBehaviour
                     }
                 }
                 Debug.Log("Closed Loop");
+                Destroy(activeLasso.gameObject, 2f);
                 loopClosed = false;
             }
+        }
+        else
+        {
+            Destroy(activeLasso.gameObject);   
         }
     }
 
