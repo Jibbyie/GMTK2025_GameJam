@@ -39,4 +39,9 @@ public class Lasso : MonoBehaviour
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPosition(points.Count - 1, point);
     }
+
+    public List<Vector2> GetPoints()
+    {
+        return points;
+    }
 }
