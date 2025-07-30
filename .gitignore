@@ -1,0 +1,74 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Uu]ser[Ss]ettings/
+TextMesh Pro/
+StarterAssets/
+Assets/Plugins/Editor/JetBrains*
+Assets/Plugins/Pixel Crushers*
+Assets/StarterAssets
+Assets/Paro222*
+Assets/ERP
+Assets/FirstGearGames
+FirstGearGames/
+Assets/2000 Game Sound FX/
+2000 Game Sound FX/
+2000GameSoundFX/
+ERP/
+Assets/TextMesh Pro
+Assets/Live2D
+Live2D/
+
+# Cache and local data
+.vscode/
+.vs/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# Rider
+*.sln.iml
+*.DotSettings
+*.DotSettings.user
+
+# Build artifacts
+*.apk
+*.aab
+*.xcworkspace/
+*.xcuserstate
+*.xcodeproj/
+*.xcassets/
+*.ipa
+
+# Crash and debug logs
+sysinfo.txt
+*.stacktrace
+
+# Unity Collaborate (if using Unity Teams)
+.collabignore
+.Collab/
+
+# TextMesh Pro generated files
+Assets/TextMesh Pro/Resources/Font_Asset_Creation_Settings*
+
+# Ignore all .meta files except under Assets
+!Assets/**/*.meta
+*.meta
+
+# Uncomment if using git-lfs for large binary files like models/audio/etc
+# *.fbx filter=lfs diff=lfs merge=lfs -text
+# *.mp3 filter=lfs diff=lfs merge=lfs -text
