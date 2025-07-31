@@ -7,11 +7,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool isRetreating;
     [SerializeField] private float retreatTimer;
     [SerializeField] private float retreatDuration = 1f;
+    [SerializeField] private float damageToPlayer = 20f;
 
     private Rigidbody2D enemyRB;
     private Vector3 retreatDirection;
 
     private PlayerMovement player;
+    private PlayerLogic playerLogic;
 
     private void Awake()
     {
@@ -20,17 +22,22 @@ public class Enemy : MonoBehaviour
         retreatTimer = retreatDuration;
 
         player = FindFirstObjectByType<PlayerMovement>();
+        playerLogic = FindFirstObjectByType<PlayerLogic>();
     }
 
     private void Update()
     {
         if(isRetreating)
         {
+            // Calculate distance from enemy and player
             var enemyPosition = enemyRB.transform.position;
             var playerPosition = player.GetPlayerPosition();
             var distanceBetween = enemyPosition - playerPosition;
+
+            // Store distance normalized for angles
             retreatDirection = distanceBetween.normalized;
 
+            // Move enemy in this retreated direction
             enemyRB.transform.position += retreatDirection * enemySpeed * Time.deltaTime;
             retreatTimer -= Time.deltaTime;
 
@@ -60,6 +67,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Shield"))
         {
             isRetreating = true;
+            playerLogic.TakeDamage(damageToPlayer);
             retreatTimer = retreatDuration;
         }
     }
