@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class LassoGenerator : MonoBehaviour
 {
+    [Header("Lasso Values")]
+    [SerializeField] private float closedLoopValue = 0.25f;
+    [SerializeField] private int minimumNumPoints = 50;
+    [SerializeField] private float lassoLifeTime = 0.75f;
+
     public GameObject lassoPrefab;
 
     Lasso activeLasso;
@@ -72,8 +77,8 @@ public class LassoGenerator : MonoBehaviour
     {
         // If the first and last points are close to each other
         // And there are enough points in the line
-        if (Vector2.Distance(activeLasso.GetPoints().First(), activeLasso.GetPoints().Last()) < .25f
-            && activeLasso.GetPoints().Count > 50)
+        if (Vector2.Distance(activeLasso.GetPoints().First(), activeLasso.GetPoints().Last()) < closedLoopValue
+            && activeLasso.GetPoints().Count > minimumNumPoints)
         {
             loopClosed = true;
             if (loopClosed) // if we detect a closed loop
@@ -95,7 +100,7 @@ public class LassoGenerator : MonoBehaviour
                         obj.OnDetected();
                     }
                 }
-                Destroy(activeLasso.gameObject, 1f);
+                Destroy(activeLasso.gameObject, lassoLifeTime);
                 loopClosed = false;
             }
         }
