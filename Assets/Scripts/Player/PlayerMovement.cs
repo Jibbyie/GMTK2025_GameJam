@@ -22,8 +22,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        Move();
         Jump();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
     }
 
     public void SetWalkSpeed(float newSpeed)

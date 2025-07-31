@@ -73,7 +73,7 @@ public class LassoGenerator : MonoBehaviour
         // If the first and last points are close to each other
         // And there are enough points in the line
         if (Vector2.Distance(activeLasso.GetPoints().First(), activeLasso.GetPoints().Last()) < .25f
-            && activeLasso.GetPoints().Count > 15)
+            && activeLasso.GetPoints().Count > 50)
         {
             loopClosed = true;
             if (loopClosed) // if we detect a closed loop

@@ -7,6 +7,7 @@ public class Lasso : MonoBehaviour
     public LineRenderer lineRenderer;
 
     List<Vector2> points;
+    [SerializeField] private int maxPointCount;
 
     void Awake()
     {
@@ -28,7 +29,10 @@ public class Lasso : MonoBehaviour
         // Only add a new point if the mouse has moved a significant distance
         if (Vector2.Distance(points.Last(), position) > .1f)
         {
-            SetPoint(position);
+            if(points.Count < maxPointCount)
+            {
+                SetPoint(position);
+            }
         }
     }
 
