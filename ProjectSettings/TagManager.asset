@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Square
   - Enemy
+  - Shield
   layers:
   - Default
   - TransparentFX

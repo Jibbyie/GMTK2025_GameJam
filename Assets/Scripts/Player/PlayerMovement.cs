@@ -70,4 +70,9 @@ public class PlayerMovement : MonoBehaviour
             JumpBufferTimer = 0f;
         }
     }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return playerRB.transform.position;
+    }
 }
