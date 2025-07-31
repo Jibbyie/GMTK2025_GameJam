@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("Prototyping");
+            SceneManager.LoadScene("Level1");
         }
     }
 }

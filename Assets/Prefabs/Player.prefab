@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 7
-  JumpSpeed: 6
+  JumpSpeed: 7
   CoyoteTime: 0.1
   CoyoteTimer: 0
   JumpBuffer: 0.1
