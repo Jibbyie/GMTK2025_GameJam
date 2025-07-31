@@ -5,6 +5,8 @@ public class PlayerLogic : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float playerHealth;
 
+    private PossessionDetectable possession;
+
     private void Awake()
     {
         maxHealth = 100f;
@@ -23,6 +25,12 @@ public class PlayerLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         playerHealth -= damage;
+
+        PossessionDetectable[] allPossessables = FindObjectsByType<PossessionDetectable>(FindObjectsSortMode.None);
+        foreach(PossessionDetectable obj in allPossessables)
+        {
+            obj.isPossessed = false;
+        }
     }
 
     public float GetHealth()
