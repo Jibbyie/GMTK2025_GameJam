@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 83859092}
   - component: {fileID: 83859093}
   - component: {fileID: 83859094}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 791147737}
   - component: {fileID: 791147736}
   - component: {fileID: 791147738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,10 +652,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 986276064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1833263fd1ec7a249aea196c9940718f, type: 3}
+  m_Script: {fileID: 11500000, guid: d3fd320c90271d043af26b1a4f2362ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lassoPrefab: {fileID: 3714383048427622777, guid: 74e6747d4c56b9840a1092e7d3713769, type: 3}
+  lassoPrefab: {fileID: 3714383048427622777, guid: 66b1ca0f8d0b14843815a7856a85164a, type: 3}
 --- !u!1 &1190002798
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +824,7 @@ GameObject:
   - component: {fileID: 1448313270}
   - component: {fileID: 1448313269}
   - component: {fileID: 1448313268}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,8 +984,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1520594538}
   - component: {fileID: 1520594539}
-  - component: {fileID: 1520594540}
+  - component: {fileID: 1520594542}
   - component: {fileID: 1520594541}
+  - component: {fileID: 1520594540}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1045,10 +1046,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1520594537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c939de0e340d3e745b762431b53a2927, type: 3}
+  m_Script: {fileID: 11500000, guid: 8280bfbefbc7e5a47ab6ca8a6b17d0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
+  SR: {fileID: 1428015824}
 --- !u!114 &1520594541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,7 +1059,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1520594537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b524f8881f6b2a4d812d8b77011e9a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 46026475c7621f149a5da5dfebbcd287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  JumpSpeed: 5
+  CoyoteTime: 0.1
+  CoyoteTimer: 0
+  JumpBuffer: 0.1
+  JumpBufferTimer: 0
+--- !u!114 &1520594542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520594537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b918a763ddca0d44594cf432a720535a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1522124906
@@ -1074,7 +1093,7 @@ GameObject:
   - component: {fileID: 1522124908}
   - component: {fileID: 1522124910}
   - component: {fileID: 1522124911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1252,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1522124906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb195cf2dee3ef46b2ca54b41ceea18, type: 3}
+  m_Script: {fileID: 11500000, guid: c9055f10977c749468f8a7475bd5f1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   platformSpeed: 5

@@ -67,7 +67,6 @@ Assets/TextMesh Pro/Resources/Font_Asset_Creation_Settings*
 
 # Ignore all .meta files except under Assets
 !Assets/**/*.meta
-*.meta
 
 # Uncomment if using git-lfs for large binary files like models/audio/etc
 # *.fbx filter=lfs diff=lfs merge=lfs -text
