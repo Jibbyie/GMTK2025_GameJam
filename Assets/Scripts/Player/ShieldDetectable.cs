@@ -25,6 +25,7 @@ public class ShieldDetectable : DetectableObject
         }
     }
 
+    // Can apply shield every 5 seconds
     private IEnumerator ApplyShield()
     {
         if (shieldPrefab != null && player != null)
@@ -32,12 +33,9 @@ public class ShieldDetectable : DetectableObject
             Instantiate(shieldPrefab, player.GetPlayerPosition(), Quaternion.identity);
             shieldActive = true;
 
-            Debug.Log(shieldActive);
-
             yield return new WaitForSeconds(shieldCooldown);
             shieldActive = false;
 
-            Debug.Log(shieldActive);
         }
     }
 }

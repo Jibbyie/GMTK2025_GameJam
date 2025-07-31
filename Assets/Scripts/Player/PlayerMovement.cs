@@ -73,6 +73,10 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 GetPlayerPosition()
     {
+        if (playerRB == null)
+        {
+            return Vector3.zero;
+        }
         return playerRB.transform.position;
     }
 }

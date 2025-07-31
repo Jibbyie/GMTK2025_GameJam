@@ -1,12 +1,22 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private PlayerLogic playerLogic;
+    [SerializeField] TMP_Text playerHealth;
 
+    private void Awake()
+    {
+        playerLogic = FindFirstObjectByType<PlayerLogic>();
+    }
     private void Update()
     {
         SpawnEnemy();
+        ReloadScene();
+        playerHealth.text = "Health: " + playerLogic.GetHealth().ToString("F0") + "/100";
     }
 
     private void SpawnEnemy()
@@ -20,6 +30,14 @@ public class GameManager : MonoBehaviour
             worldPos.z = 0;
 
             Instantiate(enemyPrefab, worldPos, Quaternion.identity);
+        }
+    }
+
+    private void ReloadScene()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("Prototyping");
         }
     }
 }
