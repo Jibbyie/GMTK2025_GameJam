@@ -9,6 +9,11 @@ public class LassoGenerator : MonoBehaviour
     Lasso activeLasso;
     bool loopClosed;
 
+    private void Awake()
+    {
+        activeLasso = null;
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))

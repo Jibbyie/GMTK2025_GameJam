@@ -19,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody2D>();
         GD = GetComponent<GroundDetector>();
-
-        
     }
     private void Update()
     {
