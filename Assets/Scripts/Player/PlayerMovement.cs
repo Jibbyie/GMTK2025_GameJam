@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRB;
     private float horizontalInput;
     private GroundDetector GD;
+    private PossessionDetectable possession;
 
     //Coyote time and jump buffering variables
     [SerializeField] private float CoyoteTime = 0.1f;
@@ -19,15 +20,24 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody2D>();
         GD = GetComponent<GroundDetector>();
+        possession = FindFirstObjectByType<PossessionDetectable>();
     }
     private void Update()
     {
-        Jump();
+        // Only allow jumping if NOTHING is currently possessed.
+        if (!IsAnythingPossessed())
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
     {
-        Move();
+        // Only allow movement if NOTHING is currently possessed.
+        if (!IsAnythingPossessed())
+        {
+            Move();
+        }
     }
 
     public void SetWalkSpeed(float newSpeed)
@@ -71,6 +81,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool IsAnythingPossessed()
+    {
+        // Find all possessable objects.
+        PossessionDetectable[] allPossessables = FindObjectsByType<PossessionDetectable>(FindObjectsSortMode.None);
+
+        foreach (PossessionDetectable obj in allPossessables)
+        {
+            // If we find ANY object that is possessed...
+            if (obj.GetPossessionState())
+            {
+                return true;
+            }
+        }
+
+        // If the loop finishes without finding any possessed objects, return false.
+        return false;
+    }
+
     public Vector3 GetPlayerPosition()
     {
         if (playerRB == null)
@@ -79,4 +107,5 @@ public class PlayerMovement : MonoBehaviour
         }
         return playerRB.transform.position;
     }
+
 }
