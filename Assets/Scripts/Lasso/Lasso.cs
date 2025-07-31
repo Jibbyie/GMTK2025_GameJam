@@ -29,7 +29,7 @@ public class Lasso : MonoBehaviour
         // Only add a new point if the mouse has moved a significant distance
         if (Vector2.Distance(points.Last(), position) > .1f)
         {
-            if(points.Count < maxPointCount)
+            if(points.Count < maxPointCount) // Prevent too large of a loop 
             {
                 SetPoint(position);
             }
