@@ -15,6 +15,7 @@ public class PlayerLogic : MonoBehaviour
     {
         if(playerHealth <= 0)
         {
+            playerHealth = 0;
             Destroy(this.gameObject);
         }
     }
@@ -22,5 +23,10 @@ public class PlayerLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         playerHealth -= damage;
+    }
+
+    public float GetHealth()
+    {
+        return playerHealth;
     }
 }
