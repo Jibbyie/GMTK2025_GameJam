@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     {
         playerLogic = FindFirstObjectByType<PlayerLogic>();
     }
+
     private void Update()
     {
         SpawnEnemy();

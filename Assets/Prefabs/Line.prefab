@@ -153,4 +153,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
-  maxPointCount: 100
+  maxPointCount: 150
+  pointCollectionInterval: 0.016
