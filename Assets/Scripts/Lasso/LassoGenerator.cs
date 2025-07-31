@@ -9,22 +9,52 @@ public class LassoGenerator : MonoBehaviour
     Lasso activeLasso;
     bool loopClosed;
 
+    bool ignoreInput;
+
+    // Defensive programming
     private void Awake()
     {
+        // Destroy any persisting lassos on scene reload 
+        Lasso[] persistingLasso = FindObjectsByType<Lasso>(FindObjectsSortMode.None);
+        foreach(Lasso lasso in persistingLasso)
+        {
+            Destroy(lasso.gameObject);
+        }
+        // Set activeLasso to null
         activeLasso = null;
+
+        // Check for a phantom press on game start - input validation
+        if(Input.GetMouseButton(0))
+        {
+            ignoreInput = true;
+        }
     }
 
     private void Update()
     {
+        // If we let go of the phantom press
+        if (Input.GetMouseButtonUp(0) && ignoreInput)
+        {
+            ignoreInput = false;
+        }
+
+        // Dont run update until phantom press is resolved
+        if(ignoreInput) return;
+
         if (Input.GetMouseButtonDown(0))
         {
+            // Destroy any pre existing lassos (double check)
+            if(activeLasso != null)
+            {
+                Destroy(activeLasso.gameObject);
+            }
+
             GameObject newLasso = Instantiate(lassoPrefab);
             activeLasso = newLasso.GetComponent<Lasso>();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-
             DetectLoop();
             activeLasso = null;
         }
