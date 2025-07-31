@@ -5,8 +5,8 @@ using UnityEngine;
 public class LassoGenerator : MonoBehaviour
 {
     [Header("Lasso Values")]
-    [SerializeField] private float closedLoopValue = 0.25f;
-    [SerializeField] private int minimumNumPoints = 50;
+    [SerializeField] private float closedLoopValue = 0.35f; // Slightly more forgiving
+    [SerializeField] private int fallbackMinimumPoints = 25; // Lower fallback minimum
     [SerializeField] private float lassoLifeTime = 0.75f;
 
     public GameObject lassoPrefab;
@@ -75,16 +75,19 @@ public class LassoGenerator : MonoBehaviour
 
     void DetectLoop()
     {
-        var intersectionLoopPoints = DetectSelfIntersection(activeLasso.GetPoints());
+        // Get adaptive minimum points based on draw time
+        int adaptiveMinimum = activeLasso.GetAdaptiveMinimumPoints();
+
+        var intersectionLoopPoints = DetectSelfIntersection(activeLasso.GetPoints(), adaptiveMinimum);
         if (intersectionLoopPoints != null)
         {
             ObjectDetected(intersectionLoopPoints);
             Debug.Log("Intersected Loop!");
         }
         // If the first and last points are close to each other
-        // And there are enough points in the line
+        // And there are enough points in the line (use adaptive or fallback minimum)
         else if (Vector2.Distance(activeLasso.GetPoints().First(), activeLasso.GetPoints().Last()) < closedLoopValue
-            && activeLasso.GetPoints().Count > minimumNumPoints)
+            && activeLasso.GetPoints().Count > Mathf.Min(adaptiveMinimum, fallbackMinimumPoints))
         {
             loopClosed = true;
             if (loopClosed) // if we detect a closed loop
@@ -95,7 +98,7 @@ public class LassoGenerator : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not a closed loop - destroying immediately");
+            Debug.Log($"Not a closed loop - Points: {activeLasso.GetPoints().Count}, Required: {Mathf.Min(adaptiveMinimum, fallbackMinimumPoints)}, Distance: {Vector2.Distance(activeLasso.GetPoints().First(), activeLasso.GetPoints().Last())}");
             Destroy(activeLasso.gameObject);
         }
     }
@@ -140,7 +143,7 @@ public class LassoGenerator : MonoBehaviour
     }
 
     // https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
-    List<Vector2> DetectSelfIntersection(List<Vector2> lassoPoints)
+    List<Vector2> DetectSelfIntersection(List<Vector2> lassoPoints, int minimumPointsRequired)
     {
         if (lassoPoints != null)
         {
@@ -158,7 +161,7 @@ public class LassoGenerator : MonoBehaviour
                         // Found intersection between segments - extract the loop portion
                         List<Vector2> extractedLoopPoints = lassoPoints.GetRange(firstSegmentIndex + 1,
                                                                                 (secondSegmentIndex + 1) - (firstSegmentIndex + 1));
-                        if (extractedLoopPoints.Count > minimumNumPoints)
+                        if (extractedLoopPoints.Count > minimumPointsRequired)
                         {
                             return extractedLoopPoints;
                         }

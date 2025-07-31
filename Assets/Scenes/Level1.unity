@@ -670,6 +670,10 @@ PrefabInstance:
       propertyPath: walkSpeed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5951298216790680068, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8bc980fcf3fa4884198472f50ec21ad3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16563,7 +16567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closedLoopValue: 1
-  minimumNumPoints: 20
+  fallbackMinimumPoints: 25
   lassoLifeTime: 0.75
   lassoPrefab: {fileID: 3714383048427622777, guid: 66b1ca0f8d0b14843815a7856a85164a, type: 3}
 --- !u!1660057539 &9223372036854775807
