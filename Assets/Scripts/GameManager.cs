@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
         playerHealth = GameObject.Find("PlayerHealth").GetComponent<TMP_Text>();
         shieldCooldown = GameObject.Find("ShieldCooldown").GetComponent<TMP_Text>();
     }
+    void Start()
+    {
+        GameMusicManager.Instance.SetLevelParameter(1);
+    }
 
     private void Update()
     {
