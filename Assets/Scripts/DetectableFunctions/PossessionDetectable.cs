@@ -5,7 +5,7 @@ using UnityEngine;
 public class PossessionDetectable : DetectableObject
 {
     [SerializeField] private float speed;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     private float horizontalInput;
     private float verticalInput;
@@ -35,6 +35,8 @@ public class PossessionDetectable : DetectableObject
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        virtualCamera = FindFirstObjectByType<CinemachineCamera>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         originalColour = spriteRenderer.color;
     }
 
