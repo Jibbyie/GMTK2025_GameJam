@@ -13,6 +13,8 @@ public class Lasso : MonoBehaviour
     [SerializeField] private float pointCollectionInterval = 0.016f; // ~60fps equivalent
     private float lastPointTime;
     private float totalDrawTime;
+    private float minDrawDistance;
+    [SerializeField] private float drawSensitivity = 0.01f;
 
     void Awake()
     {
@@ -21,8 +23,13 @@ public class Lasso : MonoBehaviour
             lineRenderer = GetComponent<LineRenderer>();
         }
         points = new List<Vector2>();
+        maxPointCount = 120;
         lastPointTime = 0f;
         totalDrawTime = 0f;
+
+        // Calculate world space distances on start
+        // Lasso drawing logic scales with player's screen size
+        minDrawDistance = Camera.main.orthographicSize * drawSensitivity; // 20% of camera height
     }
 
     public void UpdateLine(Vector2 position)
@@ -42,13 +49,13 @@ public class Lasso : MonoBehaviour
 
         // Primary: Time-based collection with movement requirement
         if (Time.time - lastPointTime >= pointCollectionInterval &&
-            Vector2.Distance(points.Last(), position) > 0.05f)  // movement threshold 
+            Vector2.Distance(points.Last(), position) > minDrawDistance)  // movement threshold 
         {
             shouldAddPoint = true;
         }
 
         // Secondary: Distance-based collection for fine details
-        if (Vector2.Distance(points.Last(), position) > 0.02f && !shouldAddPoint)
+        if (Vector2.Distance(points.Last(), position) > minDrawDistance && !shouldAddPoint)
         {
             shouldAddPoint = true;
         }
@@ -58,8 +65,6 @@ public class Lasso : MonoBehaviour
             SetPoint(position);
             lastPointTime = Time.time;
         }
-
-        Debug.Log($"Points: {points.Count}");
     }
 
     void SetPoint(Vector2 point)

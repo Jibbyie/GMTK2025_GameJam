@@ -8,6 +8,8 @@ public class LassoGenerator : MonoBehaviour
     [SerializeField] private float closedLoopValue = 2f; // Slightly more forgiving
     [SerializeField] private int fallbackMinimumPoints = 20; // Lower fallback minimum
     [SerializeField] private float lassoLifeTime = 0.75f;
+    [SerializeField] private float drawSensitivity = 0.01f; // 1% of camera height
+    private float minDrawDistance;
 
     public GameObject lassoPrefab;
 
@@ -33,6 +35,11 @@ public class LassoGenerator : MonoBehaviour
         {
             ignoreInput = true;
         }
+
+        // Calculate world space distances on start
+        // Lasso drawing logic scales with player's screen size
+        minDrawDistance = Camera.main.orthographicSize * drawSensitivity;
+        closedLoopValue = Camera.main.orthographicSize * 0.2f; // 20% of camera height
     }
 
     private void Update()
@@ -72,7 +79,7 @@ public class LassoGenerator : MonoBehaviour
 
             // Only update line if mouse has moved significantly or count is 0
             if (activeLasso.GetPoints().Count == 0 ||
-                Vector2.Distance(activeLasso.GetPoints().Last(), mousePositionWorld) > 0.05f)
+                Vector2.Distance(activeLasso.GetPoints().Last(), mousePositionWorld) > minDrawDistance)
             {
                 activeLasso.UpdateLine(mousePositionWorld);
             }
@@ -88,7 +95,6 @@ public class LassoGenerator : MonoBehaviour
         if (intersectionLoopPoints != null)
         {
             ObjectDetected(intersectionLoopPoints);
-            Debug.Log("Intersected Loop!");
         }
         // If the first and last points are close to each other
         // And there are enough points in the line (use adaptive or fallback minimum)
@@ -99,7 +105,6 @@ public class LassoGenerator : MonoBehaviour
             if (loopClosed) // if we detect a closed loop
             {
                 ObjectDetected(activeLasso.GetPoints());
-                Debug.Log("Proximity Loop!");
             }
         }
         else
