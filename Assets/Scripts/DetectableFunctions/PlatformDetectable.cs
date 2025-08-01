@@ -38,7 +38,7 @@ public class PlatformDetectable : DetectableObject
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(isMoving && currentTarget  != null)
         {
