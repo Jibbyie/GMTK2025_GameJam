@@ -7,6 +7,8 @@ TagManager:
   - Square
   - Enemy
   - Shield
+  - PressurePlate
+  - Weight
   layers:
   - Default
   - TransparentFX

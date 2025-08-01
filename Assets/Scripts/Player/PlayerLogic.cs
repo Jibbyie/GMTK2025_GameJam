@@ -19,7 +19,6 @@ public class PlayerLogic : MonoBehaviour
 
     private void Awake()
     {
-        maxHealth = 100f;
         playerHealth = maxHealth;
 
         if (spriteRenderer == null)
