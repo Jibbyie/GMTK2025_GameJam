@@ -13,9 +13,10 @@ public class PlayerLogic : MonoBehaviour
     [SerializeField] private Color hit = Color.red;
     private Color originalColour;
 
-    [SerializeField] private CinemachineCamera virtualCamera;
+    [Header("Music References")]
+    private bool isLowHealthMusicActive = false;
 
-    private PossessionDetectable possession;
+    [SerializeField] private CinemachineCamera virtualCamera;
 
     private void Awake()
     {
@@ -36,6 +37,18 @@ public class PlayerLogic : MonoBehaviour
         {
             playerHealth = 0;
             Destroy(this.gameObject);
+            return;
+        }
+
+        // Determine if health should be in the low state
+        bool shouldBeLowHealth = (playerHealth <= 40);
+
+        // Check if different from the current music state
+        if (shouldBeLowHealth != isLowHealthMusicActive)
+        {
+            // If different, update FMOD and tracking variable
+            GameMusicManager.Instance.SetLowHealthParameter(shouldBeLowHealth);
+            isLowHealthMusicActive = shouldBeLowHealth;
         }
     }
 
