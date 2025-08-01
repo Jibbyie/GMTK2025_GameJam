@@ -40,11 +40,11 @@ public class PlayerLogic : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Enemy enemy)
     {
         playerHealth -= damage;
 
-        if(virtualCamera.Follow != transform)
+        if (virtualCamera.Follow != transform)
         {
             virtualCamera.Follow = transform;
         }
@@ -54,8 +54,8 @@ public class PlayerLogic : MonoBehaviour
         foreach(PossessionDetectable obj in allPossessables)
         {
             obj.isPossessed = false;
+            obj.rb.bodyType = RigidbodyType2D.Dynamic;
         }
-
 
     }
 

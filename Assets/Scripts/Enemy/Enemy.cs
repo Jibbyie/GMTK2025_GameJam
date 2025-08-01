@@ -2,24 +2,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private enum State
+    {
+        Wandering,
+        Chasing,
+        Retreating
+    }
+
     [Header("Enemy Values")]
     [SerializeField] private float enemySpeed = 5f;
+    [SerializeField] private float wanderSpeed = 3f;
     [SerializeField] private float damageToPlayer = 20f;
 
-    [Header("State Flags")]
-    [SerializeField] private bool isRetreating;
-    private bool isChasing; 
-
-    [Header("Retreat Logic")]
-    [SerializeField] private float retreatTimer;
+    [Header("State Timers")]
     [SerializeField] private float retreatDuration = 1f;
-    private Vector2 retreatDirection;
-
-    [Header("Wander Logic")]
-    [SerializeField] private float wanderTimer;
     [SerializeField] private float wanderDuration = 3f;
-    [SerializeField] private float wanderDirection = 1f;
-    [SerializeField] private float wanderSpeed = 3f;
+    private float retreatTimer;
+    private float wanderTimer;
 
     [Header("Component References")]
     [SerializeField] private EnemyDetectionRadius ERD;
@@ -27,90 +26,153 @@ public class Enemy : MonoBehaviour
     private PlayerMovement player;
     private PlayerLogic playerLogic;
 
+    // Private variables for state and movement
+    private State currentState;
+    private float wanderDirection = 1f;
+    private Vector2 retreatDirection;
+
     private void Awake()
     {
         enemyRB = GetComponent<Rigidbody2D>();
         player = FindFirstObjectByType<PlayerMovement>();
         playerLogic = FindFirstObjectByType<PlayerLogic>();
+    }
 
-        // Initialize timers
-        retreatTimer = retreatDuration;
+    private void Start()
+    {
+        // Start in the Wandering state.
+        currentState = State.Wandering;
         wanderTimer = wanderDuration;
     }
 
+    // Update is for logic, timers, and state transitions.
     private void Update()
     {
-        if (isRetreating)
+        switch (currentState)
         {
-            retreatTimer -= Time.deltaTime;
-            if (retreatTimer <= 0)
-            {
-                isRetreating = false;
-                retreatTimer = retreatDuration;
-            }
-        }
-        else // Only check for chasing or wandering if not retreating
-        {
-            // Check the detection radius to see if we should be chasing
-            if (ERD != null && ERD.playerDetected)
-            {
-                isChasing = true;
-            }
-            else
-            {
-                isChasing = false;
-                // Handle the wander timer only when wandering
-                wanderTimer -= Time.deltaTime;
-                if (wanderTimer <= 0)
-                {
-                    wanderDirection *= -1; // Flip direction
-                    wanderTimer = wanderDuration;
-                }
-            }
+            case State.Wandering:
+                HandleWanderingState();
+                break;
+            case State.Chasing:
+                HandleChasingState();
+                break;
+            case State.Retreating:
+                HandleRetreatingState();
+                break;
         }
     }
 
+    // FixedUpdate is only for applying physics-based movement.
     private void FixedUpdate()
     {
-        if (isRetreating)
+        switch (currentState)
         {
-            // Calculate direction away from the player once
-            if (retreatTimer >= retreatDuration - Time.fixedDeltaTime) // Do this only on the first frame of retreating
-            {
-                Vector2 directionFromPlayer = (transform.position - player.GetPlayerPosition()).normalized;
-                retreatDirection = directionFromPlayer;
-            }
-            enemyRB.linearVelocity = retreatDirection * enemySpeed;
-        }
-        else if (isChasing)
-        {
-            // Chase the player
-            Vector2 directionToPlayer = (player.GetPlayerPosition() - transform.position).normalized;
-            enemyRB.linearVelocity = new Vector2(directionToPlayer.x * enemySpeed, directionToPlayer.y * enemySpeed);
-        }
-        else // Wander
-        {
-            enemyRB.linearVelocity = new Vector2(wanderDirection * wanderSpeed, enemyRB.linearVelocity.y);
+            case State.Wandering:
+                ApplyWanderMovement();
+                break;
+            case State.Chasing:
+                ApplyChaseMovement();
+                break;
+            case State.Retreating:
+                ApplyRetreatMovement();
+                break;
         }
     }
 
-    // Handles physical collision with the player
+    // State Logic (The "Brain")
+
+    private void HandleWanderingState()
+    {
+        // Transition to Chasing if player is detected.
+        if (ERD != null && ERD.playerDetected)
+        {
+            currentState = State.Chasing;
+            return;
+        }
+
+        // Handle wander timer.
+        wanderTimer -= Time.deltaTime;
+        if (wanderTimer <= 0)
+        {
+            wanderDirection *= -1; // Flip direction
+            wanderTimer = wanderDuration;
+        }
+    }
+
+    private void HandleChasingState()
+    {
+        // Transition to Wandering if player is no longer detected.
+        if (ERD != null && !ERD.playerDetected)
+        {
+            currentState = State.Wandering;
+            wanderTimer = wanderDuration; // Reset wander timer
+        }
+    }
+
+    private void HandleRetreatingState()
+    {
+        // Count down the retreat timer.
+        retreatTimer -= Time.deltaTime;
+        if (retreatTimer <= 0)
+        {
+            // When retreat is over, go back to chasing (player is likely still nearby).
+            currentState = State.Chasing;
+        }
+    }
+
+    // Movement Logic (The "Body")
+
+    private void ApplyWanderMovement()
+    {
+        enemyRB.linearVelocity = new Vector2(wanderDirection * wanderSpeed, enemyRB.linearVelocity.y);
+    }
+
+    private void ApplyChaseMovement()
+    {
+        if (player == null) return;
+        Vector2 directionToPlayer = (player.GetPlayerPosition() - transform.position).normalized;
+        enemyRB.linearVelocity = directionToPlayer * enemySpeed;
+    }
+
+    private void ApplyRetreatMovement()
+    {
+        enemyRB.linearVelocity = retreatDirection * enemySpeed;
+    }
+
+
+    // Collision and Public Methods
+
+    // Public method for the PlayerLogic fail-safe to call.
+    public void ActivateRetreat()
+    {
+        if (currentState == State.Retreating) return; // Don't restart if already retreating.
+
+        currentState = State.Retreating;
+        retreatTimer = retreatDuration;
+
+        // Calculate retreat direction once upon activation.
+        if (player != null)
+        {
+            retreatDirection = (transform.position - player.GetPlayerPosition()).normalized;
+        }
+    }
+
+    // Handles physical collision with the player.
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            isRetreating = true;
-            playerLogic.TakeDamage(damageToPlayer);
+            playerLogic.TakeDamage(damageToPlayer, this);
+            ActivateRetreat();
         }
     }
 
-    // Handles trigger collision with the shield
+    // Handles trigger collision with the shield.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Shield"))
         {
-            // Retreat, but do NOT deal damage
-            isRetreating = true;
+            ActivateRetreat();
         }
     }
 }
