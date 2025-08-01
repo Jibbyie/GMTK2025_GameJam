@@ -35,6 +35,8 @@ public class PossessionDetectable : DetectableObject
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        virtualCamera = FindFirstObjectByType<CinemachineCamera>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         originalColour = spriteRenderer.color;
     }
 

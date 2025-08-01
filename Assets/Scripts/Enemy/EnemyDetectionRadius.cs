@@ -11,10 +11,6 @@ public class EnemyDetectionRadius : MonoBehaviour
         {
             playerDetected = true;
         }
-        else
-        {
-            return;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -29,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+        else
+        {
+            playerRB.linearVelocity = new Vector2(0, playerRB.linearVelocity.y);
+        }
     }
 
     private void FixedUpdate()

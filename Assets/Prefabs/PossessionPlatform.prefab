@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4.32, z: 0}
-  m_LocalScale: {x: 4, y: 0.5, z: 1}
+  m_LocalScale: {x: 3, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -150,6 +150,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   isPossessed: 0
+  spriteRenderer: {fileID: 0}
+  flashDuration: 0.25
+  possessedColour: {r: 0, g: 1, b: 1, a: 1}
+  unpossessedColour: {r: 1, g: 0, b: 0, a: 1}
+  virtualCamera: {fileID: 0}
+  player: {fileID: 0}
 --- !u!50 &6051779998930128855
 Rigidbody2D:
   serializedVersion: 5
