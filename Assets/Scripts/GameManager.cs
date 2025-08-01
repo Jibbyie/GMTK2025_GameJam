@@ -6,11 +6,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private PlayerLogic playerLogic;
-    [SerializeField] TMP_Text playerHealth;
+    [SerializeField] private ShieldDetectable shield;
+    [SerializeField] private TMP_Text playerHealth;
+    [SerializeField] private TMP_Text shieldCooldown;
 
     private void Awake()
     {
         playerLogic = FindFirstObjectByType<PlayerLogic>();
+        shield = FindFirstObjectByType<ShieldDetectable>();
     }
 
     private void Update()
@@ -18,6 +21,18 @@ public class GameManager : MonoBehaviour
         SpawnEnemy();
         ReloadScene();
         playerHealth.text = "Health: " + playerLogic.GetHealth().ToString("F0") + "/100";
+
+        // Update shield text based on its status
+        if (shield.IsShieldActive())
+        {
+            // If active, show the countdown
+            shieldCooldown.text = "Shield Cooldown: " + shield.GetRemainingCooldown().ToString("F1") + "s";
+        }
+        else
+        {
+            // If not active, show it's ready
+            shieldCooldown.text = "Shield: Ready";
+        }
     }
 
     private void SpawnEnemy()
