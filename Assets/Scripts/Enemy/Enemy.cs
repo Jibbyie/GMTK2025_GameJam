@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
 
     private PlayerMovement player;
     private PlayerLogic playerLogic;
+    //[SerializeField] private EnemyDetectionRadius EDR;
 
     private void Awake()
     {
