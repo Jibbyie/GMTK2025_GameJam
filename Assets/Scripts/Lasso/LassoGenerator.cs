@@ -69,7 +69,13 @@ public class LassoGenerator : MonoBehaviour
             Vector3 mousePositionScreen = Input.mousePosition;
             mousePositionScreen.z = 10f;
             Vector2 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
-            activeLasso.UpdateLine(mousePositionWorld);
+
+            // Only update line if mouse has moved significantly or count is 0
+            if (activeLasso.GetPoints().Count == 0 ||
+                Vector2.Distance(activeLasso.GetPoints().Last(), mousePositionWorld) > 0.05f)
+            {
+                activeLasso.UpdateLine(mousePositionWorld);
+            }
         }
     }
 

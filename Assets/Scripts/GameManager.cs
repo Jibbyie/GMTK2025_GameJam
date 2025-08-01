@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     {
         playerLogic = FindFirstObjectByType<PlayerLogic>();
         shield = FindFirstObjectByType<ShieldDetectable>();
+
+        playerHealth = GameObject.Find("PlayerHealth").GetComponent<TMP_Text>();
+        shieldCooldown = GameObject.Find("ShieldCooldown").GetComponent<TMP_Text>();
     }
 
     private void Update()
