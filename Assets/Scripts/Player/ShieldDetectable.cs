@@ -7,35 +7,56 @@ public class ShieldDetectable : DetectableObject
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private float shieldCooldown = 5f;
 
-    bool shieldActive;
-    
+    private bool shieldActive;
+
+    // Tracks the current remaining time
+    private float cooldownTimer;
+
     private PlayerMovement player;
 
     private void Awake()
     {
         player = FindFirstObjectByType<PlayerMovement>();
         shieldActive = false;
+        cooldownTimer = 0f;
     }
 
     public override void OnDetected()
     {
-        if(!shieldActive)
+        if (!shieldActive)
         {
             StartCoroutine(ApplyShield());
         }
     }
 
-    // Can apply shield every 5 seconds
     private IEnumerator ApplyShield()
     {
         if (shieldPrefab != null && player != null)
         {
             Instantiate(shieldPrefab, player.GetPlayerPosition(), Quaternion.identity);
             shieldActive = true;
+            cooldownTimer = shieldCooldown;
 
-            yield return new WaitForSeconds(shieldCooldown);
+            // Actively count down the time
+            while (cooldownTimer > 0)
+            {
+                cooldownTimer -= Time.deltaTime;
+                yield return null; // Wait for the next frame
+            }
+
+            cooldownTimer = 0;
             shieldActive = false;
-
         }
+    }
+
+    // Public method for other scripts to check the status
+    public bool IsShieldActive()
+    {
+        return shieldActive;
+    }
+
+    public float GetRemainingCooldown()
+    {
+        return cooldownTimer;
     }
 }

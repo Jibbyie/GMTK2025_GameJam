@@ -20,15 +20,15 @@ public class Lasso : MonoBehaviour
         {
             lineRenderer = GetComponent<LineRenderer>();
         }
+        points = new List<Vector2>();
         lastPointTime = 0f;
         totalDrawTime = 0f;
     }
 
     public void UpdateLine(Vector2 position)
     {
-        if (points == null)
+        if (points.Count == 0) // Change from null check to count check
         {
-            points = new List<Vector2>();
             SetPoint(position);
             lastPointTime = Time.time;
             return;
@@ -40,13 +40,14 @@ public class Lasso : MonoBehaviour
         // Time-based collection with distance fallback
         bool shouldAddPoint = false;
 
-        // Primary: Time-based collection
-        if (Time.time - lastPointTime >= pointCollectionInterval)
+        // Primary: Time-based collection with movement requirement
+        if (Time.time - lastPointTime >= pointCollectionInterval &&
+            Vector2.Distance(points.Last(), position) > 0.05f)  // movement threshold 
         {
             shouldAddPoint = true;
         }
 
-        // Secondary: Distance-based collection (reduced threshold)
+        // Secondary: Distance-based collection for fine details
         if (Vector2.Distance(points.Last(), position) > 0.02f && !shouldAddPoint)
         {
             shouldAddPoint = true;
@@ -57,6 +58,8 @@ public class Lasso : MonoBehaviour
             SetPoint(position);
             lastPointTime = Time.time;
         }
+
+        Debug.Log($"Points: {points.Count}");
     }
 
     void SetPoint(Vector2 point)
