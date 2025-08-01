@@ -5,8 +5,8 @@ using UnityEngine;
 public class LassoGenerator : MonoBehaviour
 {
     [Header("Lasso Values")]
-    [SerializeField] private float closedLoopValue = 0.35f; // Slightly more forgiving
-    [SerializeField] private int fallbackMinimumPoints = 25; // Lower fallback minimum
+    [SerializeField] private float closedLoopValue = 2f; // Slightly more forgiving
+    [SerializeField] private int fallbackMinimumPoints = 20; // Lower fallback minimum
     [SerializeField] private float lassoLifeTime = 0.75f;
 
     public GameObject lassoPrefab;
