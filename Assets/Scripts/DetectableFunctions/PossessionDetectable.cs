@@ -17,6 +17,7 @@ public class PossessionDetectable : DetectableObject
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
         speed = 5f;
     }
     public override void OnDetected()
@@ -29,16 +30,19 @@ public class PossessionDetectable : DetectableObject
                 if(obj != this) // don't possess yourself
                 {
                     obj.isPossessed = false;
+                    obj.rb.bodyType = RigidbodyType2D.Dynamic;
                 }
             }
 
             // Possess yourself otherwise
             isPossessed = true;
+            rb.bodyType = RigidbodyType2D.Kinematic;
 
         }
         else
         {
             isPossessed = false;
+            rb.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 
