@@ -152,10 +152,10 @@ TextureImporter:
       name: Player_Death_Sheet_0
       rect:
         serializedVersion: 2
-        x: 49
-        y: 3
-        width: 384
-        height: 378
+        x: 0
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,10 +174,10 @@ TextureImporter:
       name: Player_Death_Sheet_1
       rect:
         serializedVersion: 2
-        x: 530
-        y: 3
-        width: 381
-        height: 378
+        x: 480
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,10 +196,10 @@ TextureImporter:
       name: Player_Death_Sheet_2
       rect:
         serializedVersion: 2
-        x: 981
-        y: 55
-        width: 445
-        height: 274
+        x: 960
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +218,10 @@ TextureImporter:
       name: Player_Death_Sheet_3
       rect:
         serializedVersion: 2
-        x: 1450
-        y: 110
-        width: 460
-        height: 198
+        x: 1440
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,10 +240,10 @@ TextureImporter:
       name: Player_Death_Sheet_4
       rect:
         serializedVersion: 2
-        x: 1913
-        y: 180
-        width: 7
-        height: 6
+        x: 1920
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,10 +262,10 @@ TextureImporter:
       name: Player_Death_Sheet_5
       rect:
         serializedVersion: 2
-        x: 2023
-        y: 131
-        width: 268
-        height: 113
+        x: 2400
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,10 +284,10 @@ TextureImporter:
       name: Player_Death_Sheet_6
       rect:
         serializedVersion: 2
-        x: 2505
-        y: 131
-        width: 268
-        height: 113
+        x: 2880
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,10 +306,10 @@ TextureImporter:
       name: Player_Death_Sheet_7
       rect:
         serializedVersion: 2
-        x: 3068
-        y: 158
-        width: 113
-        height: 110
+        x: 3360
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,10 +328,10 @@ TextureImporter:
       name: Player_Death_Sheet_8
       rect:
         serializedVersion: 2
-        x: 3550
-        y: 158
-        width: 109
-        height: 110
+        x: 3840
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,10 +350,10 @@ TextureImporter:
       name: Player_Death_Sheet_9
       rect:
         serializedVersion: 2
-        x: 4031
-        y: 165
-        width: 110
-        height: 109
+        x: 4320
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -372,10 +372,10 @@ TextureImporter:
       name: Player_Death_Sheet_10
       rect:
         serializedVersion: 2
-        x: 4506
-        y: 64
-        width: 110
-        height: 110
+        x: 4800
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -394,10 +394,10 @@ TextureImporter:
       name: Player_Death_Sheet_11
       rect:
         serializedVersion: 2
-        x: 4985
-        y: 3
-        width: 112
-        height: 113
+        x: 5280
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,10 +416,10 @@ TextureImporter:
       name: Player_Death_Sheet_12
       rect:
         serializedVersion: 2
-        x: 5466
-        y: 9
-        width: 110
-        height: 113
+        x: 5760
+        y: 0
+        width: 480
+        height: 384
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -430,28 +430,6 @@ TextureImporter:
       bones: []
       spriteID: 8aeb9070a9e8a62d0800000000000000
       internalID: -3284656186019168600
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Death_Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 5944
-        y: 3
-        width: 113
-        height: 113
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f25b2b1cc98746b45b35dbfa24d3df81
-      internalID: -1362871348
       vertices: []
       indices: 
       edges: []
@@ -475,7 +453,6 @@ TextureImporter:
       Player_Death_Sheet_10: 772724939594936186
       Player_Death_Sheet_11: -1895592381637848035
       Player_Death_Sheet_12: -3284656186019168600
-      Player_Death_Sheet_13: -1362871348
       Player_Death_Sheet_2: -4825780838400029526
       Player_Death_Sheet_3: 5636875895582691277
       Player_Death_Sheet_4: 7475266461040974586

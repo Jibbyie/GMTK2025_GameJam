@@ -23,11 +23,13 @@ public class Enemy : MonoBehaviour
 
     [Header("Component References")]
     [SerializeField] private EnemyDetectionRadius ERD;
+    [SerializeField] private EnemyDetectable ED;
     private Rigidbody2D enemyRB;
     private PlayerMovement player;
     private PlayerLogic playerLogic;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip shieldHit;
+    [SerializeField] private AudioClip detectionSfx;
 
     // Private variables for state and movement
     private State currentState;
@@ -37,6 +39,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         enemyRB = GetComponent<Rigidbody2D>();
+        ED = GetComponent<EnemyDetectable>();
         player = FindFirstObjectByType<PlayerMovement>();
         playerLogic = FindFirstObjectByType<PlayerLogic>();
         audioSource = GetComponent<AudioSource>();
@@ -103,6 +106,11 @@ public class Enemy : MonoBehaviour
         // Transition to Chasing if player is detected.
         if (ERD != null && ERD.playerDetected)
         {
+            if (detectionSfx != null)
+            {
+                AudioSource.PlayClipAtPoint(detectionSfx, transform.position);
+            }
+
             currentState = State.Chasing;
             return;
         }
@@ -183,6 +191,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (ED.IsDead()) return;
             playerLogic.TakeDamage(damageToPlayer, this);
             ActivateRetreat();
         }
@@ -193,6 +202,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Shield"))
         {
+            if (ED.IsDead()) return;
             audioSource.PlayOneShot(shieldHit);
             ActivateRetreat();
         }
