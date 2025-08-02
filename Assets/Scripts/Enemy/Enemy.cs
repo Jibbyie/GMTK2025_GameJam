@@ -106,6 +106,10 @@ public class Enemy : MonoBehaviour
         {
             currentState = State.Wandering;
             wanderTimer = wanderDuration; // Reset wander timer
+
+            // Reset the enemy's velocity completely to prevent carrying over
+            // vertical momentum from the chase or retreat states.
+            enemyRB.linearVelocity = Vector2.zero;
         }
     }
 
