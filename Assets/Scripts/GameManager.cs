@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text playerHealth;
     [SerializeField] private TMP_Text shieldCooldown;
 
+    [SerializeField] private bool isGamePaused;
+    [SerializeField] private GameObject paused;
+
     private void Awake()
     {
         playerLogic = FindFirstObjectByType<PlayerLogic>();
@@ -17,6 +20,8 @@ public class GameManager : MonoBehaviour
 
         playerHealth = GameObject.Find("PlayerHealth").GetComponent<TMP_Text>();
         shieldCooldown = GameObject.Find("ShieldCooldown").GetComponent<TMP_Text>();
+
+        isGamePaused = false;
     }
     void Start()
     {
@@ -25,6 +30,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            isGamePaused = !isGamePaused;
+            HandlePauseState();
+
+        }
         SpawnEnemy();
         ReloadScene();
         playerHealth.text = "Health: " + playerLogic.GetHealth().ToString("F0") + "/100";
@@ -60,7 +71,23 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene("MainLevel");
+        }
+    }
+
+    private void HandlePauseState()
+    {
+        if(isGamePaused)
+        {
+            paused.SetActive(true);
+            Time.timeScale = 0f;
+            GameMusicManager.Instance.SetPauseState(true);
+        }
+        else
+        {
+            paused.SetActive(false);
+            Time.timeScale = 1f;
+            GameMusicManager.Instance.SetPauseState(false);
         }
     }
 }
