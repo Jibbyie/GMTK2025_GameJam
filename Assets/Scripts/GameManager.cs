@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.T))
         {
             isGamePaused = !isGamePaused;
             HandlePauseState();
@@ -90,4 +90,5 @@ public class GameManager : MonoBehaviour
             GameMusicManager.Instance.SetPauseState(false);
         }
     }
+
 }
