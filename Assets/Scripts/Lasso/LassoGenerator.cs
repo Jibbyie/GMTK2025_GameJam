@@ -5,10 +5,10 @@ using UnityEngine;
 public class LassoGenerator : MonoBehaviour
 {
     [Header("Lasso Values")]
-    [SerializeField] private float closedLoopValue = 2f; // Slightly more forgiving
-    [SerializeField] private int fallbackMinimumPoints = 20; // Lower fallback minimum
+    [SerializeField] private float closedLoopValue = 3f; // Slightly more forgiving
+    [SerializeField] private int fallbackMinimumPoints = 10; // Lower fallback minimum
     [SerializeField] private float lassoLifeTime = 0.75f;
-    [SerializeField] private float drawSensitivity = 0.01f; // 1% of camera height
+    [SerializeField] private float drawSensitivity = 0.005f; // 1% of camera height
     private float minDrawDistance;
     private bool canLasso;
     [SerializeField] private Animator playerAnimator;
@@ -41,7 +41,7 @@ public class LassoGenerator : MonoBehaviour
         // Calculate world space distances on start
         // Lasso drawing logic scales with player's screen size
         minDrawDistance = Camera.main.orthographicSize * drawSensitivity;
-        closedLoopValue = Camera.main.orthographicSize * 0.2f; // 20% of camera height
+        closedLoopValue = Camera.main.orthographicSize * 0.3f; // 30% of camera height
     }
 
     private void Update()

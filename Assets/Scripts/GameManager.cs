@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private bool isGamePaused;
     [SerializeField] private GameObject paused;
-    private bool audioResumed = false;
 
     private void Awake()
     {

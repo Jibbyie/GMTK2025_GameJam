@@ -154,4 +154,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxPointCount: 120
-  pointCollectionInterval: 0.016
+  pointCollectionInterval: 0.008
+  drawSensitivity: 0.005

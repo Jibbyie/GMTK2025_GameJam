@@ -10,11 +10,11 @@ public class Lasso : MonoBehaviour
     [SerializeField] private int maxPointCount;
 
     // Time-based point collection
-    [SerializeField] private float pointCollectionInterval = 0.016f; // ~60fps equivalent
+    [SerializeField] private float pointCollectionInterval = 0.008f; // ~60fps equivalent
     private float lastPointTime;
     private float totalDrawTime;
     private float minDrawDistance;
-    [SerializeField] private float drawSensitivity = 0.01f;
+    [SerializeField] private float drawSensitivity = 0.005f;
 
     void Awake()
     {
@@ -83,8 +83,8 @@ public class Lasso : MonoBehaviour
     // Get adaptive minimum points based on draw time
     public int GetAdaptiveMinimumPoints()
     {
-        // At least 20 points, but scale with draw time (30 points per second)
-        return Mathf.Max(20, Mathf.RoundToInt(totalDrawTime * 30f));
+        // At least 10 points, but scale with draw time (20 points per second)
+        return Mathf.Max(10, Mathf.RoundToInt(totalDrawTime * 20f));
     }
 
     public float GetTotalDrawTime()
