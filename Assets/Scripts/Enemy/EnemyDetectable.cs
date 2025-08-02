@@ -23,6 +23,7 @@ public class EnemyDetectable : DetectableObject
 
     [Header("Audio References")]
     [SerializeField] private AudioClip[] deathSfx;
+    private AudioSource audioSource;
 
     private Rigidbody2D enemyRB;
     private Collider2D enemyCollider;
@@ -32,8 +33,9 @@ public class EnemyDetectable : DetectableObject
         enemyHealth = enemyMaxHealth;
         enemyRB = GetComponent<Rigidbody2D>();
         enemyCollider = GetComponent<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
 
-        if(spriteRenderer == null)
+        if (spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
@@ -76,7 +78,7 @@ public class EnemyDetectable : DetectableObject
             int randomIndex = Random.Range(0, deathSfx.Length);
             AudioClip clipToPlay = deathSfx[randomIndex];
             // Play the sound while the object is still fully active in the scene
-            AudioSource.PlayClipAtPoint(clipToPlay, transform.position);
+            audioSource.PlayOneShot(clipToPlay);
         }
 
         // 3. Now disable the collider and trigger the animation
