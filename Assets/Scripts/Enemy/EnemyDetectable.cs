@@ -66,30 +66,30 @@ public class EnemyDetectable : DetectableObject
 
     private IEnumerator DeathSequence()
     {
-        // 1. Set state and freeze the enemy
+        // 1. Set state and freeze the enemy's movement
         isDead = true;
-        enemyRB.bodyType = RigidbodyType2D.Static; // Freezes the enemy in place
-        enemyCollider.enabled = false;
-        
+        enemyRB.bodyType = RigidbodyType2D.Static;
 
-        // 2. Trigger the death animation
+        // 2. Play death sound
+        if (deathSfx != null && deathSfx.Length > 0)
+        {
+            int randomIndex = Random.Range(0, deathSfx.Length);
+            AudioClip clipToPlay = deathSfx[randomIndex];
+            // Play the sound while the object is still fully active in the scene
+            AudioSource.PlayClipAtPoint(clipToPlay, transform.position);
+        }
+
+        // 3. Now disable the collider and trigger the animation
+        enemyCollider.enabled = false;
         if (animator != null)
         {
             animator.SetTrigger("Death");
         }
 
-        // 3. Play death sound
-        if (deathSfx != null && deathSfx.Length > 0) 
-        {
-            int randomIndex = Random.Range(0, deathSfx.Length); 
-            AudioClip clipToPlay = deathSfx[randomIndex]; 
-            AudioSource.PlayClipAtPoint(clipToPlay, transform.position); 
-        }
-
         // 4. Wait for the animation to finish
         yield return new WaitForSeconds(deathAnimationDuration);
 
-        Destroy(this.gameObject); 
+        Destroy(this.gameObject);
     }
 
     private IEnumerator FlashCoroutine()
