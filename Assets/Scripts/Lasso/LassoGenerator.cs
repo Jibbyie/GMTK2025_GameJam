@@ -62,14 +62,10 @@ public class LassoGenerator : MonoBehaviour
             {
                 Destroy(activeLasso.gameObject);
             }
-
+            playerAnimator.SetBool("isLasso", true);
             GameObject newLassoObject = Instantiate(lassoPrefab);
             activeLasso = newLassoObject.GetComponent<Lasso>();
-
-            canLasso = true;
-            playerAnimator.SetBool("isLasso", canLasso);
         }
-
         if (Input.GetMouseButtonUp(0))
         {
             canLasso = false;
