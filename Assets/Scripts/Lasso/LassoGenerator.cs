@@ -10,6 +10,8 @@ public class LassoGenerator : MonoBehaviour
     [SerializeField] private float lassoLifeTime = 0.75f;
     [SerializeField] private float drawSensitivity = 0.01f; // 1% of camera height
     private float minDrawDistance;
+    private bool canLasso;
+    [SerializeField] private Animator playerAnimator;
 
     public GameObject lassoPrefab;
 
@@ -63,11 +65,18 @@ public class LassoGenerator : MonoBehaviour
 
             GameObject newLassoObject = Instantiate(lassoPrefab);
             activeLasso = newLassoObject.GetComponent<Lasso>();
+
+            canLasso = true;
+            playerAnimator.SetBool("isLasso", canLasso);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
+            canLasso = false;
+            playerAnimator.SetBool("isLasso", canLasso);
+
             DetectLoop();
+
             activeLasso = null;
         }
 

@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Prototyping.unity
     guid: 345d9d7bbedc2ba418476a1d1c3c3011
   - enabled: 1
+    path: Assets/Scenes/PlayGame.unity
+    guid: 31fc019667982dc4eb90369b52f420f6
+  - enabled: 1
     path: Assets/Scenes/MainLevel.unity
     guid: 5439a21a503cd6543906ff8f84b84914
   - enabled: 1

@@ -32,25 +32,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // This block handles browser autoplay policies by resuming FMOD
-        // on the first key press or mouse click.
-        if (!audioResumed)
-        {
-            if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
-            {
-                // Get the high-level Studio System from the RuntimeManager
-                FMOD.Studio.System studioSystem = FMODUnity.RuntimeManager.StudioSystem;
-
-                // Get the low-level Core System from the Studio System
-                studioSystem.getCoreSystem(out FMOD.System coreSystem);
-
-                // Resume the mixer on the Core System. This is what un-suspends audio in a browser.
-                coreSystem.mixerResume();
-
-                audioResumed = true;
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             isGamePaused = !isGamePaused;
@@ -100,13 +81,13 @@ public class GameManager : MonoBehaviour
     {
         if(isGamePaused)
         {
-            paused.SetActive(true);
+            //paused.SetActive(true);
             Time.timeScale = 0f;
             GameMusicManager.Instance.SetPauseState(true);
         }
         else
         {
-            paused.SetActive(false);
+            //paused.SetActive(false);
             Time.timeScale = 1f;
             GameMusicManager.Instance.SetPauseState(false);
         }

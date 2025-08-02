@@ -1983,6 +1983,7 @@ GameObject:
   - component: {fileID: 598701670}
   - component: {fileID: 598701669}
   - component: {fileID: 598701668}
+  - component: {fileID: 598701672}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2140,6 +2141,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &598701672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598701666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1001 &622724730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3551,6 +3566,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abaa5bd84c530524c9e38f976081a61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1038461574 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5676735552531298286, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
+  m_PrefabInstance: {fileID: 1038461572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1038550518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131158,6 +131178,7 @@ MonoBehaviour:
   fallbackMinimumPoints: 25
   lassoLifeTime: 0.75
   drawSensitivity: 0.01
+  playerAnimator: {fileID: 1038461574}
   lassoPrefab: {fileID: 3714383048427622777, guid: 66b1ca0f8d0b14843815a7856a85164a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: 0f997d10a9c739342bc0bb60ed1463b7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7897141293477919385
+    second: Player_Lasso_Sheet_V4_0
+  - first:
+      213: 7070176056890653574
+    second: Player_Lasso_Sheet_V4_1
+  - first:
+      213: -8068833309500959215
+    second: Player_Lasso_Sheet_V4_2
+  - first:
+      213: -595202611661641664
+    second: Player_Lasso_Sheet_V4_3
+  - first:
+      213: 3223595763555807534
+    second: Player_Lasso_Sheet_V4_4
+  - first:
+      213: 4465919229313140985
+    second: Player_Lasso_Sheet_V4_5
+  - first:
+      213: 4265392405228929362
+    second: Player_Lasso_Sheet_V4_6
+  - first:
+      213: 1502123885460812260
+    second: Player_Lasso_Sheet_V4_7
+  - first:
+      213: -1386260034861706106
+    second: Player_Lasso_Sheet_V4_8
+  - first:
+      213: -882543584280180928
+    second: Player_Lasso_Sheet_V4_9
+  - first:
+      213: -1045736060164270510
+    second: Player_Lasso_Sheet_V4_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 0
+        width: 382
+        height: 507
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99af1d26a28489d60800000000000000
+      internalID: 7897141293477919385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_1
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 379
+        height: 507
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68b70721aaf4e1260800000000000000
+      internalID: 7070176056890653574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_2
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 0
+        width: 377
+        height: 501
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1161b530bdeb50090800000000000000
+      internalID: -8068833309500959215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_3
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 0
+        width: 382
+        height: 502
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 048e582d06a6db7f0800000000000000
+      internalID: -595202611661641664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_4
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 0
+        width: 375
+        height: 510
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e21b23284438cbc20800000000000000
+      internalID: 3223595763555807534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_5
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 0
+        width: 365
+        height: 511
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f8cbcaa0e12afd30800000000000000
+      internalID: 4465919229313140985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_6
+      rect:
+        serializedVersion: 2
+        x: 2312
+        y: 0
+        width: 379
+        height: 507
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251c1552bc7b13b30800000000000000
+      internalID: 4265392405228929362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_7
+      rect:
+        serializedVersion: 2
+        x: 3081
+        y: 0
+        width: 383
+        height: 502
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e1758917bd98d410800000000000000
+      internalID: 1502123885460812260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_8
+      rect:
+        serializedVersion: 2
+        x: 3472
+        y: 0
+        width: 377
+        height: 502
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6845fbfc7d303cce0800000000000000
+      internalID: -1386260034861706106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_9
+      rect:
+        serializedVersion: 2
+        x: 3855
+        y: 0
+        width: 371
+        height: 509
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0470e28394390c3f0800000000000000
+      internalID: -882543584280180928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Lasso_Sheet_V4_10
+      rect:
+        serializedVersion: 2
+        x: 4234
+        y: 0
+        width: 375
+        height: 509
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2569715089ccc71f0800000000000000
+      internalID: -1045736060164270510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 975878cb8c57a044995098d69081fc27
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Player_Lasso_Sheet_V4_0: 7897141293477919385
+      Player_Lasso_Sheet_V4_1: 7070176056890653574
+      Player_Lasso_Sheet_V4_10: -1045736060164270510
+      Player_Lasso_Sheet_V4_2: -8068833309500959215
+      Player_Lasso_Sheet_V4_3: -595202611661641664
+      Player_Lasso_Sheet_V4_4: 3223595763555807534
+      Player_Lasso_Sheet_V4_5: 4465919229313140985
+      Player_Lasso_Sheet_V4_6: 4265392405228929362
+      Player_Lasso_Sheet_V4_7: 1502123885460812260
+      Player_Lasso_Sheet_V4_8: -1386260034861706106
+      Player_Lasso_Sheet_V4_9: -882543584280180928
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
