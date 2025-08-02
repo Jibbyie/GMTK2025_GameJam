@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+using DG.Tweening;
 public class TangibleDetectable : DetectableObject
 {
     [Header("Values")]
@@ -11,8 +11,18 @@ public class TangibleDetectable : DetectableObject
     [SerializeField] private bool isTangible;
     [SerializeField] private Collider2D internalCollider;
     [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] activationSfx;
+
     private void Awake()
     {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         activeTimer = activeDuration;
 
         isTangible = false;
@@ -31,6 +41,15 @@ public class TangibleDetectable : DetectableObject
 
         if(!isTangible)
         {
+            // 1. Pick a random clip and assign it
+            AudioClip clipToPlay = activationSfx[Random.Range(0, activationSfx.Length)];
+            audioSource.clip = clipToPlay;
+            audioSource.Play();
+
+            // 2. Fade in the audio
+            audioSource.DOKill(); // Stop any previous fades
+            audioSource.DOFade(0.3f, 0.5f);
+
             isTangible = true;
             internalCollider.enabled = true;
 
@@ -51,6 +70,9 @@ public class TangibleDetectable : DetectableObject
             activeTimer -= Time.deltaTime;
             if(activeTimer <= 0)
             {
+                audioSource.DOKill();
+                audioSource.DOFade(0f, 1f).OnComplete(() => audioSource.Stop());
+
                 isTangible = false;
                 internalCollider.enabled = false;
 

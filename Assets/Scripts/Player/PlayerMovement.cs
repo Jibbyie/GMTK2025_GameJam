@@ -14,6 +14,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isVariableJumping;
     [SerializeField] private bool isGrounded = false;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip jumpSfx;
+    [SerializeField] private AudioClip landSfx;
+    [SerializeField] private AudioClip[] footstepSfx; // Assign your 6 footstep sounds here in the Inspector
+    [SerializeField] private float footstepCooldown = 0.4f;
+
+    private AudioSource audioSource;
+    private float footstepTimer;
+    private bool wasGrounded; // Used to detect the moment of landing
+
     private Rigidbody2D playerRB;
     Animator animator;
     private float horizontalInput;
@@ -26,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         possession = FindFirstObjectByType<PossessionDetectable>();
         GroundDetector = GetComponentInChildren<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
@@ -54,7 +65,12 @@ public class PlayerMovement : MonoBehaviour
         {
             Move();
             animator.SetFloat("yVelocity", playerRB.linearVelocity.y);
+
+            HandleLanding();
+            HandleFootsteps();
         }
+
+        wasGrounded = isGrounded;
 
     }
 
@@ -95,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartJump()
     {
+        audioSource.PlayOneShot(jumpSfx, 0.35f);
         playerRB.linearVelocity = new Vector2(playerRB.linearVelocity.x, initialJumpForce);
 
         isGrounded = false;
@@ -142,6 +159,41 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
         return false;
+    }
+    private void HandleLanding()
+    {
+        // Play the landing sound if we just became grounded, but we weren't in the last frame
+        if (isGrounded && !wasGrounded)
+        {
+            audioSource.PlayOneShot(landSfx, 0.35f);
+        }
+    }
+
+    private void HandleFootsteps()
+    {
+        // The player must be on the ground and moving horizontally
+        if (isGrounded && horizontalInput != 0f)
+        {
+            // Count down the timer
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0)
+            {
+                // Pick a random clip from the array
+                AudioClip randomFootstep = footstepSfx[UnityEngine.Random.Range(0, footstepSfx.Length)];
+
+                // Play the sound
+                audioSource.PlayOneShot(randomFootstep, 0.2f);
+
+                // Reset the timer
+                footstepTimer = footstepCooldown;
+            }
+        }
+        else
+        {
+            // If the player stops, reset the timer so the next step sound plays instantly
+            footstepTimer = 0;
+        }
     }
 
     private void FlipSprite()
@@ -198,6 +250,11 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
 
         }
+    }
+
+    public bool IsFacingRight()
+    {
+        return isFacingRight; 
     }
 
 }

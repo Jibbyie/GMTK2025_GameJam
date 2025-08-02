@@ -19,6 +19,9 @@ public class EnemyDetectable : DetectableObject
     // Store original color so we can restore it
     private Color originalColour;
 
+    [Header("Audio References")]
+    [SerializeField] private AudioClip[] deathSfx;
+
     private Rigidbody2D enemyRB;
 
     private void Awake()
@@ -48,6 +51,17 @@ public class EnemyDetectable : DetectableObject
 
         if(enemyHealth <= 0 )
         {
+            // 1. Check if there are any sounds assigned to prevent errors
+            if (deathSfx != null && deathSfx.Length > 0)
+            {
+                // 2. Pick a random index from the array
+                int randomIndex = Random.Range(0, deathSfx.Length);
+                AudioClip clipToPlay = deathSfx[randomIndex];
+
+                // 3. Play the chosen sound at the enemy's position
+                AudioSource.PlayClipAtPoint(clipToPlay, transform.position);
+            }
+
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
             Destroy(this.gameObject, 0.1f);
         }

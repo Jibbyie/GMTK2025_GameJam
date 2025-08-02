@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float enemySpeed = 5f;
     [SerializeField] private float wanderSpeed = 3f;
     [SerializeField] private float damageToPlayer = 20f;
+    bool isFacingRight = false;
 
     [Header("State Timers")]
     [SerializeField] private float retreatDuration = 1f;
@@ -25,6 +26,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D enemyRB;
     private PlayerMovement player;
     private PlayerLogic playerLogic;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip shieldHit;
 
     // Private variables for state and movement
     private State currentState;
@@ -36,6 +39,7 @@ public class Enemy : MonoBehaviour
         enemyRB = GetComponent<Rigidbody2D>();
         player = FindFirstObjectByType<PlayerMovement>();
         playerLogic = FindFirstObjectByType<PlayerLogic>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -48,6 +52,8 @@ public class Enemy : MonoBehaviour
     // Update is for logic, timers, and state transitions.
     private void Update()
     {
+        FlipSprite();
+
         switch (currentState)
         {
             case State.Wandering:
@@ -76,6 +82,17 @@ public class Enemy : MonoBehaviour
             case State.Retreating:
                 ApplyRetreatMovement();
                 break;
+        }
+    }
+
+    private void FlipSprite()
+    {
+        if (isFacingRight && enemyRB.linearVelocity.x < 0f || !isFacingRight && enemyRB.linearVelocity.x > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
 
@@ -176,6 +193,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Shield"))
         {
+            audioSource.PlayOneShot(shieldHit);
             ActivateRetreat();
         }
     }
