@@ -14,21 +14,32 @@ public class EnemyDetectable : DetectableObject
     [SerializeField] private Color flashColour = Color.red;
 
     [Header("Animation References")]
-    [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private Animator animator; 
+    [SerializeField] private float deathAnimationDuration = 1f;
+    private bool isDead = false;
 
     // Store original color so we can restore it
     private Color originalColour;
 
+    [Header("Audio References")]
+    [SerializeField] private AudioClip[] deathSfx;
+
     private Rigidbody2D enemyRB;
+    private Collider2D enemyCollider;
 
     private void Awake()
     {
         enemyHealth = enemyMaxHealth;
         enemyRB = GetComponent<Rigidbody2D>();
+        enemyCollider = GetComponent<Collider2D>();
 
         if(spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>(); 
         }
 
         originalColour = spriteRenderer.color;
@@ -48,9 +59,37 @@ public class EnemyDetectable : DetectableObject
 
         if(enemyHealth <= 0 )
         {
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            Destroy(this.gameObject, 0.1f);
+            StartCoroutine(DeathSequence());
         }
+    }
+    // In EnemyDetectable.cs
+
+    private IEnumerator DeathSequence()
+    {
+        // 1. Set state and freeze the enemy
+        isDead = true;
+        enemyRB.bodyType = RigidbodyType2D.Static; // Freezes the enemy in place
+        enemyCollider.enabled = false;
+        
+
+        // 2. Trigger the death animation
+        if (animator != null)
+        {
+            animator.SetTrigger("Death");
+        }
+
+        // 3. Play death sound
+        if (deathSfx != null && deathSfx.Length > 0) 
+        {
+            int randomIndex = Random.Range(0, deathSfx.Length); 
+            AudioClip clipToPlay = deathSfx[randomIndex]; 
+            AudioSource.PlayClipAtPoint(clipToPlay, transform.position); 
+        }
+
+        // 4. Wait for the animation to finish
+        yield return new WaitForSeconds(deathAnimationDuration);
+
+        Destroy(this.gameObject); 
     }
 
     private IEnumerator FlashCoroutine()
@@ -63,5 +102,10 @@ public class EnemyDetectable : DetectableObject
 
         // Restore original colour
         spriteRenderer.color = originalColour;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }

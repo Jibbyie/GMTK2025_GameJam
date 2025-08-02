@@ -18,6 +18,21 @@ public class Shield : MonoBehaviour
         {
             shieldRb.transform.position = player.GetPlayerPosition();
         }
+
+        Vector3 shieldScale = transform.localScale;
+
+        if (player.IsFacingRight())
+        {
+            shieldScale.x = Mathf.Abs(shieldScale.x);
+        }
+        else
+        {
+            shieldScale.x = -Mathf.Abs(shieldScale.x);
+        }
+
+        // Apply the updated scale to the shield
+        transform.localScale = shieldScale;
+
         Destroy(this.gameObject, lifeTime);
     }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 public class LassoGenerator : MonoBehaviour
 {
@@ -12,6 +13,15 @@ public class LassoGenerator : MonoBehaviour
     private float minDrawDistance;
     private bool canLasso;
     [SerializeField] private Animator playerAnimator;
+
+    // Assign these in the Inspector
+    [Header("Audio Sources")]
+    public AudioSource loopingSource; // The AudioSource with Loop enabled
+    public AudioSource oneShotSource; // The AudioSource for release SFX
+
+    [SerializeField] AudioClip loopSucceed;
+    [SerializeField] AudioClip loopFail;
+    [SerializeField] AudioClip loopingLasso;
 
     public GameObject lassoPrefab;
 
@@ -65,6 +75,12 @@ public class LassoGenerator : MonoBehaviour
             playerAnimator.SetBool("isLasso", true);
             GameObject newLassoObject = Instantiate(lassoPrefab);
             activeLasso = newLassoObject.GetComponent<Lasso>();
+
+            loopingSource.DOKill();
+            loopingSource.clip = loopingLasso;
+            loopingSource.volume = 0f;
+            loopingSource.Play();
+            loopingSource.DOFade(1f, 0.25f); // fade in over 0.25 seconds
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -74,6 +90,7 @@ public class LassoGenerator : MonoBehaviour
             DetectLoop();
 
             activeLasso = null;
+            loopingSource.DOFade(0f, 0.5f).OnComplete(() => loopingSource.Stop());
         }
 
         if (activeLasso != null)
@@ -116,12 +133,14 @@ public class LassoGenerator : MonoBehaviour
         {
             Debug.Log($"Not a closed loop - Points: {activeLasso.GetPoints().Count}, Required: {Mathf.Min(adaptiveMinimum, fallbackMinimumPoints)}, Distance: {Vector2.Distance(activeLasso.GetPoints().First(), activeLasso.GetPoints().Last())}");
             Destroy(activeLasso.gameObject);
+            oneShotSource.PlayOneShot(loopFail);
         }
     }
 
     void ObjectDetected(List<Vector2> polygonPoints)
     {
         Debug.Log("Closed loop detected!");
+        oneShotSource.PlayOneShot(loopSucceed);
 
         // Find every object with a detectable tag
         DetectableObject[] detectableObjects = FindObjectsByType<DetectableObject>(FindObjectsSortMode.None);

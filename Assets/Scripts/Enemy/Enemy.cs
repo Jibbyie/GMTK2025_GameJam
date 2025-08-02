@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float enemySpeed = 5f;
     [SerializeField] private float wanderSpeed = 3f;
     [SerializeField] private float damageToPlayer = 20f;
+    bool isFacingRight = false;
 
     [Header("State Timers")]
     [SerializeField] private float retreatDuration = 1f;
@@ -22,9 +23,13 @@ public class Enemy : MonoBehaviour
 
     [Header("Component References")]
     [SerializeField] private EnemyDetectionRadius ERD;
+    [SerializeField] private EnemyDetectable ED;
     private Rigidbody2D enemyRB;
     private PlayerMovement player;
     private PlayerLogic playerLogic;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip shieldHit;
+    [SerializeField] private AudioClip detectionSfx;
 
     // Private variables for state and movement
     private State currentState;
@@ -34,8 +39,10 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         enemyRB = GetComponent<Rigidbody2D>();
+        ED = GetComponent<EnemyDetectable>();
         player = FindFirstObjectByType<PlayerMovement>();
         playerLogic = FindFirstObjectByType<PlayerLogic>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -48,6 +55,8 @@ public class Enemy : MonoBehaviour
     // Update is for logic, timers, and state transitions.
     private void Update()
     {
+        FlipSprite();
+
         switch (currentState)
         {
             case State.Wandering:
@@ -79,6 +88,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void FlipSprite()
+    {
+        if (isFacingRight && enemyRB.linearVelocity.x < 0f || !isFacingRight && enemyRB.linearVelocity.x > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
+    }
+
     // State Logic (The "Brain")
 
     private void HandleWanderingState()
@@ -86,6 +106,11 @@ public class Enemy : MonoBehaviour
         // Transition to Chasing if player is detected.
         if (ERD != null && ERD.playerDetected)
         {
+            if (detectionSfx != null)
+            {
+                AudioSource.PlayClipAtPoint(detectionSfx, transform.position);
+            }
+
             currentState = State.Chasing;
             return;
         }
@@ -166,6 +191,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (ED.IsDead()) return;
             playerLogic.TakeDamage(damageToPlayer, this);
             ActivateRetreat();
         }
@@ -176,6 +202,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Shield"))
         {
+            if (ED.IsDead()) return;
+            audioSource.PlayOneShot(shieldHit);
             ActivateRetreat();
         }
     }
