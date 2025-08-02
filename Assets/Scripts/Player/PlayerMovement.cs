@@ -27,11 +27,9 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody2D>();
         possession = FindFirstObjectByType<PossessionDetectable>();
-        GroundDetector = GetComponentInChildren<CapsuleCollider2D>();
+        GroundDetector = GetComponentInChildren<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
-
         GroundLayer = LayerMask.NameToLayer("Ground");
-        gameObject.layer = GroundLayer;
     }
     private void Update()
     {
@@ -57,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             Move();
             animator.SetFloat("yVelocity", playerRB.linearVelocity.y);
         }
+
     }
 
     public void SetWalkSpeed(float newSpeed)
@@ -200,4 +199,5 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
 }

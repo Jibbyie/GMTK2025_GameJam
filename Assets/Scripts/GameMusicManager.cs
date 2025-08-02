@@ -11,6 +11,7 @@ public class GameMusicManager : MonoBehaviour
     // This will hold the actual running instance of our music.
     private FMOD.Studio.EventInstance musicInstance;
 
+
     private void Awake()
     {
         // Set up the Singleton pattern.

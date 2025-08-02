@@ -9,6 +9,10 @@ public class MapTransition : MonoBehaviour
     [SerializeField] private Direction direction;
     [SerializeField] private float posOffset = 2f;
 
+    [Header("FMOD Settings")]
+    [Tooltip("The level value to send to FMOD (0 for Level 1, 1 for Level 2, etc.)")]
+    [SerializeField] private int levelIndex;
+
     enum Direction { Up, Down, Left, Right }
 
     private void Awake()
@@ -22,6 +26,8 @@ public class MapTransition : MonoBehaviour
         {
             confiner.BoundingShape2D = mapBoundary;
             UpdatePlayerPosition(collision.gameObject);
+            // Call the function in the GameMusicManager to change the music parameter.
+            GameMusicManager.Instance.SetLevelParameter(levelIndex);
         }
     }
 

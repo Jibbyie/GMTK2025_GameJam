@@ -605,6 +605,7 @@ MonoBehaviour:
   mapBoundary: {fileID: 1750173401}
   direction: 2
   posOffset: 5
+  levelIndex: 0
 --- !u!61 &197066288
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1998,7 +1999,7 @@ Transform:
   m_GameObject: {fileID: 598701666}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2211037, y: -3.6223385, z: -10}
+  m_LocalPosition: {x: -2.2265406, y: -3.6223283, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2779,6 +2780,7 @@ MonoBehaviour:
   mapBoundary: {fileID: 438766750}
   direction: 1
   posOffset: 5
+  levelIndex: 2
 --- !u!61 &764991084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2878,6 +2880,7 @@ MonoBehaviour:
   mapBoundary: {fileID: 315443892}
   direction: 1
   posOffset: 5
+  levelIndex: 3
 --- !u!61 &775611559
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3306,6 +3309,7 @@ MonoBehaviour:
   mapBoundary: {fileID: 185008158}
   direction: 3
   posOffset: 5
+  levelIndex: 1
 --- !u!61 &928381422
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3475,22 +3479,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2938588549754147928, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
-      propertyPath: m_Size.x
-      value: 0.6611254
-      objectReference: {fileID: 0}
-    - target: {fileID: 2938588549754147928, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
-      propertyPath: m_Size.y
-      value: 0.16359808
-      objectReference: {fileID: 0}
-    - target: {fileID: 2938588549754147928, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.01009175
-      objectReference: {fileID: 0}
-    - target: {fileID: 2938588549754147928, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.7792083
-      objectReference: {fileID: 0}
     - target: {fileID: 3375789649414481233, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.37
@@ -3530,10 +3518,6 @@ PrefabInstance:
     - target: {fileID: 3375789649414481233, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5874128839009069176, guid: 47e5e9ef841c5b54d8ff34fe29902641, type: 3}
-      propertyPath: initialJumpForce
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3894,7 +3878,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: acd2cdd9a4a2c1940be3d3adb0592d57, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -130421,6 +130405,7 @@ MonoBehaviour:
   mapBoundary: {fileID: 438766750}
   direction: 1
   posOffset: 5
+  levelIndex: 2
 --- !u!61 &1741013682
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using FMOD;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private bool isGamePaused;
     [SerializeField] private GameObject paused;
+    private bool audioResumed = false;
 
     private void Awake()
     {
@@ -25,12 +27,31 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        GameMusicManager.Instance.SetLevelParameter(1);
+        GameMusicManager.Instance.SetLevelParameter(0);
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
+        // This block handles browser autoplay policies by resuming FMOD
+        // on the first key press or mouse click.
+        if (!audioResumed)
+        {
+            if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
+            {
+                // Get the high-level Studio System from the RuntimeManager
+                FMOD.Studio.System studioSystem = FMODUnity.RuntimeManager.StudioSystem;
+
+                // Get the low-level Core System from the Studio System
+                studioSystem.getCoreSystem(out FMOD.System coreSystem);
+
+                // Resume the mixer on the Core System. This is what un-suspends audio in a browser.
+                coreSystem.mixerResume();
+
+                audioResumed = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
         {
             isGamePaused = !isGamePaused;
             HandlePauseState();
