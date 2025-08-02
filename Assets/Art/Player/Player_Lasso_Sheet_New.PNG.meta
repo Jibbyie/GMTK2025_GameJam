@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 11032f7f8dcc3a543b71824be29d7dff
+guid: b76fe3e2498b3de468219f49505a0754
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7100038452629797860
-    second: Player_Lasso_Sheet_0
+      213: 1053606950290729857
+    second: Player_Lasso_Sheet_New_0
   - first:
-      213: 8233883644685808149
-    second: Player_Lasso_Sheet_1
+      213: -7382830641420282886
+    second: Player_Lasso_Sheet_New_1
   - first:
-      213: 1022537550718352341
-    second: Player_Lasso_Sheet_2
+      213: -4868865430887310547
+    second: Player_Lasso_Sheet_New_2
   - first:
-      213: 3638417821700811996
-    second: Player_Lasso_Sheet_3
+      213: -9073361443827961341
+    second: Player_Lasso_Sheet_New_3
   - first:
-      213: 4336546551110300495
-    second: Player_Lasso_Sheet_4
+      213: -7093845327431225018
+    second: Player_Lasso_Sheet_New_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -125,7 +125,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Lasso_Sheet_0
+      name: Player_Lasso_Sheet_New_0
       rect:
         serializedVersion: 2
         x: 33
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c14036b15a8977d90800000000000000
-      internalID: -7100038452629797860
+      spriteID: 18b26f460f92f9e00800000000000000
+      internalID: 1053606950290729857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Lasso_Sheet_1
+      name: Player_Lasso_Sheet_New_1
       rect:
         serializedVersion: 2
         x: 1155
@@ -162,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5127563cc81a44270800000000000000
-      internalID: 8233883644685808149
+      spriteID: af35645c5aaea8990800000000000000
+      internalID: -7382830641420282886
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Lasso_Sheet_2
+      name: Player_Lasso_Sheet_New_2
       rect:
         serializedVersion: 2
         x: 1902
@@ -184,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5dbb0181c78c03e00800000000000000
-      internalID: 1022537550718352341
+      spriteID: d2b58ccdfa05e6cb0800000000000000
+      internalID: -4868865430887310547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Lasso_Sheet_3
+      name: Player_Lasso_Sheet_New_3
       rect:
         serializedVersion: 2
         x: 2273
@@ -206,14 +206,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdc6dee4bb14e7230800000000000000
-      internalID: 3638417821700811996
+      spriteID: 302b8ede6d1f41280800000000000000
+      internalID: -9073361443827961341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Lasso_Sheet_4
+      name: Player_Lasso_Sheet_New_4
       rect:
         serializedVersion: 2
         x: 4155
@@ -228,8 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f43ffdabc128e2c30800000000000000
-      internalID: 4336546551110300495
+      spriteID: 641b5ee62499d8d90800000000000000
+      internalID: -7093845327431225018
       vertices: []
       indices: 
       edges: []
@@ -238,7 +238,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -248,11 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Player_Lasso_Sheet_0: -7100038452629797860
-      Player_Lasso_Sheet_1: 8233883644685808149
-      Player_Lasso_Sheet_2: 1022537550718352341
-      Player_Lasso_Sheet_3: 3638417821700811996
-      Player_Lasso_Sheet_4: 4336546551110300495
+      Player_Lasso_Sheet_New_0: 1053606950290729857
+      Player_Lasso_Sheet_New_1: -7382830641420282886
+      Player_Lasso_Sheet_New_2: -4868865430887310547
+      Player_Lasso_Sheet_New_3: -9073361443827961341
+      Player_Lasso_Sheet_New_4: -7093845327431225018
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
