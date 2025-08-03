@@ -30,9 +30,6 @@ public class PlayerLogic : MonoBehaviour
     [SerializeField] private float deathAnimationDuration = 2f; // Placeholder for animation length
     private bool isDead = false;
 
-    [Header(("Misc"))]
-    [SerializeField] private GameOverManager gameOverManager;
-
     private void Awake()
     {
         playerHealth = maxHealth;
@@ -58,6 +55,7 @@ public class PlayerLogic : MonoBehaviour
         // Check for death and make sure the death sequence hasn't started
         if (playerHealth <= 0 && !isDead)
         {
+            playerHealth = 0;
             StartCoroutine(DeathSequence());
         }
 
@@ -90,6 +88,11 @@ public class PlayerLogic : MonoBehaviour
 
         playerHealth -= damage;
 
+        if (playerHealth < 0)
+        {
+            playerHealth = 0;
+        }
+
         if (virtualCamera.Follow != transform)
         {
             virtualCamera.Follow = transform;
@@ -107,13 +110,39 @@ public class PlayerLogic : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = respawnPoint.transform.position;
+        transform.position = new Vector3(respawnPoint.transform.position.x, respawnPoint.transform.position.y, 0f);
     }
 
     public void RespawnAndHeal()
     {
-        transform.position = respawnPoint.transform.position;
+        // 1. Reset Health and Position
         playerHealth = maxHealth;
+        if (respawnPoint != null)
+        {
+            transform.position = new Vector3(respawnPoint.transform.position.x, respawnPoint.transform.position.y, 0f);
+        }
+        else
+        {
+            transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0f);
+        }
+
+        // Reset the animator from the death state 
+        if (animator != null)
+        {
+            animator.SetTrigger("Respawn");
+        }
+
+
+        // 2. Reset the 'isDead' flag
+        isDead = false;
+
+        // 3. Re-enable player components
+        GetComponent<PlayerMovement>().enabled = true;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+
+        // 6. Reset low health music state
+        GameMusicManager.Instance.SetLowHealthParameter(false);
+        isLowHealthMusicActive = false;
     }
 
     public float GetHealth()
@@ -142,22 +171,17 @@ public class PlayerLogic : MonoBehaviour
         playerRB.bodyType = RigidbodyType2D.Static;
 
         // --- 2. Play Sound & Trigger Animation ---
-        if (deathSfx != null)
+        if (deathSfx != null) //
         {
-            audioSource.PlayOneShot(deathSfx, 0.5f);
+            audioSource.PlayOneShot(deathSfx, 0.5f); 
         }
 
-        // This triggers the death animation. 
-        animator.SetTrigger("Death");
-
+        animator.SetTrigger("Death"); 
 
         // --- 3. Wait for Animation to Finish ---
-        yield return new WaitForSeconds(deathAnimationDuration);
+        yield return new WaitForSeconds(deathAnimationDuration); 
 
-
-        // --- 4. Reset Music and Reload Scene ---
-        // Explicitly set the music back to the default state before reloading.
-        GameMusicManager.Instance.SetLowHealthParameter(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // --- 4. Automatically Respawn ---
+        RespawnAndHeal();
     }
 }

@@ -18,15 +18,28 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("Track how many enemies have been created so far")][SerializeField] private int totalEnemiesSpawned = 0;
     [SerializeField] private List<GameObject> activeEnemiesList;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource loopingAudioSource;
+    [SerializeField] private AudioSource oneShotAudioSource;
+    [SerializeField] private AudioClip loopingSfx;
+    [SerializeField] private AudioClip spawnSfx;
+    [SerializeField] private AudioClip explosionSfx;
+
     private void Awake()
     {
         activeEnemiesList = new List<GameObject>();
         spawnTimer = spawnInterval;
+        loopingAudioSource.clip = loopingSfx;
     }
     private void Update()
     {
         if (playerDetectionZone.playerDetected)
         {
+            if (!loopingAudioSource.isPlaying)
+            {
+                loopingAudioSource.Play();
+            }
+
             for (int i = activeEnemiesList.Count - 1; i >= 0; i--) // counts backwards in activenemieslist
             {
                 if (activeEnemiesList[i] == null) // if an enemy was killed and is now null
@@ -48,6 +61,13 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if (loopingAudioSource.isPlaying)
+            {
+                loopingAudioSource.Stop();
+            }
+        }
     }
     private void SpawnEnemy()
     {
@@ -61,6 +81,7 @@ public class EnemySpawner : MonoBehaviour
             var newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             activeEnemiesList.Add(newEnemy);
             totalEnemiesSpawned += 1;
+            oneShotAudioSource.PlayOneShot(spawnSfx);
 
             // if we've reached the total number of allowable spawnable enemies
             if (totalEnemiesSpawned == totalSpawnLimit)
@@ -94,7 +115,9 @@ public class EnemySpawner : MonoBehaviour
 
                 // Destroy spawner if total allowable spawnable enemies is reached
                 totalEnemiesSpawned += 1;
-                if(totalEnemiesSpawned == totalSpawnLimit)
+                oneShotAudioSource.PlayOneShot(spawnSfx, 0.5f);
+
+                if (totalEnemiesSpawned == totalSpawnLimit)
                 {
                     DestroySpawner();
                 }
@@ -102,11 +125,18 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-
     
 
     private void DestroySpawner()
     {
-            Destroy(this.gameObject);
+        if (loopingAudioSource.isPlaying)
+        {
+            loopingAudioSource.Stop();
+        }
+
+        oneShotAudioSource.Stop();
+        AudioSource.PlayClipAtPoint(explosionSfx, Camera.main.transform.position);
+
+        Destroy(this.gameObject);
     }
 }

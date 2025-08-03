@@ -50,6 +50,14 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 6838287233055813950}
+    - target: {fileID: 812766395117610146, guid: a2115f8a0f2b3c14cbe957cc4048e0ec, type: 3}
+      propertyPath: activationSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 625c8b2d16bd5534287237a84693cf70, type: 3}
+    - target: {fileID: 812766395117610146, guid: a2115f8a0f2b3c14cbe957cc4048e0ec, type: 3}
+      propertyPath: deactivationSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: f17bc697ee1070b46bea3457af8591db, type: 3}
     - target: {fileID: 5414236497102470055, guid: a2115f8a0f2b3c14cbe957cc4048e0ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.8176575
@@ -121,6 +129,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.89
       objectReference: {fileID: 0}
+    - target: {fileID: 5629501261747400468, guid: 484b793723536214db63f20ddddbeb17, type: 3}
+      propertyPath: doorMovingSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d09e18be1b5a6743836078fe436778c, type: 3}
     - target: {fileID: 6213567602167043222, guid: 484b793723536214db63f20ddddbeb17, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

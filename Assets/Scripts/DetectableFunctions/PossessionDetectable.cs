@@ -2,6 +2,8 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
+
+[RequireComponent(typeof(AudioSource))]
 public class PossessionDetectable : DetectableObject
 {
     [SerializeField] private float speed;
@@ -20,6 +22,10 @@ public class PossessionDetectable : DetectableObject
     [SerializeField] private Color possessedColour = Color.cyan;
     [SerializeField] private Color unpossessedColour = Color.red;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip possessionLoopSfx;
+    private AudioSource audioSource;
+
     [SerializeField] private CinemachineCamera virtualCamera;
     [SerializeField] private Transform player;
 
@@ -37,6 +43,9 @@ public class PossessionDetectable : DetectableObject
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = possessionLoopSfx;
 
         virtualCamera = FindFirstObjectByType<CinemachineCamera>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -82,7 +91,18 @@ public class PossessionDetectable : DetectableObject
     {
         if(isPossessed)
         {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
             Move();
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
         }
     }
 

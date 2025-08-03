@@ -12,6 +12,7 @@ public class RespawnPoint : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         GetComponent<Collider2D>().isTrigger = true;
+        transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

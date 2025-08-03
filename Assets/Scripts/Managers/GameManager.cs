@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using FMOD;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerLogic playerLogic;
     [SerializeField] private ShieldDetectable shield;
     [SerializeField] private TMP_Text playerHealth;
-    [SerializeField] private TMP_Text shieldCooldown;
+    [SerializeField] private Image shieldIcon;
 
     [SerializeField] private bool isGamePaused;
     [SerializeField] private GameObject paused;
+
+    private Coroutine shieldFadeCoroutine;
+    private bool isShieldReadyState = true;
 
     private void Awake()
     {
@@ -20,7 +24,7 @@ public class GameManager : MonoBehaviour
         shield = FindFirstObjectByType<ShieldDetectable>();
 
         playerHealth = GameObject.Find("PlayerHealth").GetComponent<TMP_Text>();
-        shieldCooldown = GameObject.Find("ShieldCooldown").GetComponent<TMP_Text>();
+        shieldIcon = GameObject.Find("ShieldIcon").GetComponent<Image>();
 
         isGamePaused = false;
     }
@@ -37,40 +41,74 @@ public class GameManager : MonoBehaviour
             HandlePauseState();
 
         }
-        SpawnEnemy();
+        //SpawnEnemy();
         ReloadScene();
-        playerHealth.text = "Health: " + playerLogic.GetHealth().ToString("F0") + "/100";
+        playerHealth.text = playerLogic.GetHealth().ToString("F0");
 
-        // Update shield text based on its status
         if (shield.IsShieldActive())
         {
-            // If active, show the countdown
-            shieldCooldown.text = "Shield Cooldown: " + shield.GetRemainingCooldown().ToString("F1") + "s";
+            if (isShieldReadyState)
+            {
+                isShieldReadyState = false;
+                StartFade(0.4f, 0.5f);
+            }
         }
         else
         {
-            // If not active, show it's ready
-            shieldCooldown.text = "Shield: Ready";
+            if (!isShieldReadyState)
+            {
+                isShieldReadyState = true;
+                StartFade(1f, 0.5f);
+            }
         }
     }
 
-    private void SpawnEnemy()
+    private void StartFade(float targetAlpha, float duration)
     {
-        if (Input.GetMouseButtonDown(1))
+        if (shieldFadeCoroutine != null)
         {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = 10;
-
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-            worldPos.z = 0;
-
-            Instantiate(enemyPrefab, worldPos, Quaternion.identity);
+            StopCoroutine(shieldFadeCoroutine);
         }
+        shieldFadeCoroutine = StartCoroutine(FadeShieldIcon(targetAlpha, duration));
     }
+
+    private IEnumerator FadeShieldIcon(float targetAlpha, float duration)
+    {
+        Color currentColor = shieldIcon.color;
+        float startAlpha = currentColor.a;
+        float elapsedTimer = 0f;
+
+        while (elapsedTimer < duration)
+        {
+            elapsedTimer += Time.deltaTime;
+            float progress = Mathf.Clamp01(elapsedTimer / duration);
+            currentColor.a = Mathf.Lerp(startAlpha, targetAlpha, progress);
+            shieldIcon.color = currentColor;
+            yield return null;
+        }
+
+        currentColor.a = targetAlpha;
+        shieldIcon.color = currentColor;
+    }
+
+
+    //private void SpawnEnemy()
+    //{
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Vector3 mousePos = Input.mousePosition;
+    //        mousePos.z = 10;
+
+    //        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+    //        worldPos.z = 0;
+
+    //        Instantiate(enemyPrefab, worldPos, Quaternion.identity);
+    //    }
+    //}
 
     private void ReloadScene()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -78,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     private void HandlePauseState()
     {
-        if(isGamePaused)
+        if (isGamePaused)
         {
             //paused.SetActive(true);
             Time.timeScale = 0f;
@@ -91,5 +129,4 @@ public class GameManager : MonoBehaviour
             GameMusicManager.Instance.SetPauseState(false);
         }
     }
-
 }
