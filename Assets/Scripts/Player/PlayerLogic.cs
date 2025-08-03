@@ -30,6 +30,9 @@ public class PlayerLogic : MonoBehaviour
     [SerializeField] private float deathAnimationDuration = 2f; // Placeholder for animation length
     private bool isDead = false;
 
+    [Header(("Misc"))]
+    [SerializeField] private GameOverManager gameOverManager;
+
     private void Awake()
     {
         playerHealth = maxHealth;
@@ -105,6 +108,12 @@ public class PlayerLogic : MonoBehaviour
     public void Respawn()
     {
         transform.position = respawnPoint.transform.position;
+    }
+
+    public void RespawnAndHeal()
+    {
+        transform.position = respawnPoint.transform.position;
+        playerHealth = maxHealth;
     }
 
     public float GetHealth()
