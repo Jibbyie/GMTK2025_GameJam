@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fea6fb2680fc44692a138cbaa84d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 5
+  enemySpeed: 3
   wanderSpeed: 3
   damageToPlayer: 20
   retreatDuration: 1
