@@ -70,7 +70,7 @@ public class PlayerLogic : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage, Enemy enemy)
+    public void TakeDamage(float damage)
     {
         // If the player is already in the death sequence, do nothing.
         if (isDead) return;
