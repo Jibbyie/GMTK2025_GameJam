@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 3
   wanderSpeed: 3
-  damageToPlayer: 20
+  damageToPlayer: 10
   retreatDuration: 1
   wanderDuration: 3
   ERD: {fileID: 6706461755770476727}

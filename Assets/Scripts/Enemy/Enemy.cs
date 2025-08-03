@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     [Header("Enemy Values")]
     [SerializeField] private float enemySpeed = 5f;
     [SerializeField] private float wanderSpeed = 3f;
-    [SerializeField] private float damageToPlayer = 20f;
+    [SerializeField] private float damageToPlayer = 10f;
     bool isFacingRight = false;
 
     [Header("State Timers")]
@@ -192,7 +192,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             if (ED.IsDead()) return;
-            playerLogic.TakeDamage(damageToPlayer, this);
+            playerLogic.TakeDamage(damageToPlayer);
             ActivateRetreat();
         }
     }
