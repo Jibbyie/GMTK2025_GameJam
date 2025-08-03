@@ -7,6 +7,7 @@ public class PlayerLogic : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float playerHealth;
+    [SerializeField] public GameObject respawnPoint;
 
     [Header("Sprite References")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -101,6 +102,10 @@ public class PlayerLogic : MonoBehaviour
 
     }
 
+    public void Respawn()
+    {
+        transform.position = respawnPoint.transform.position;
+    }
 
     public float GetHealth()
     {

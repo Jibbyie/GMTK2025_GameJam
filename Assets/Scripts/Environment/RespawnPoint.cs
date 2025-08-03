@@ -27,6 +27,10 @@ public class RespawnPoint : MonoBehaviour
             {
                 audioSource.PlayOneShot(activationSfx);
             }
+
+            //Set respawn point
+            other.gameObject.GetComponent<PlayerLogic>().respawnPoint = gameObject;
+
             Debug.Log("Respawn point set!");
         }
     }
