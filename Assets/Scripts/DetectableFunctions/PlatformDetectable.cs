@@ -49,7 +49,7 @@ public class PlatformDetectable : DetectableObject
     private void MovePlatform()
     {
         // Move towards the target
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, currentTarget.position, platformSpeed * Time.fixedDeltaTime);
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, currentTarget.position, platformSpeed * Time.deltaTime);
         transform.position = newPosition;
 
         // Check if we've reached the target

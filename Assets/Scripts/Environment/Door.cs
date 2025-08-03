@@ -22,7 +22,7 @@ public class Door : MonoBehaviour
         currentTarget = bottomPoint;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (currentTarget == null)
         {
@@ -38,7 +38,7 @@ public class Door : MonoBehaviour
         }
 
         // If we have a target and we are not there yet, move towards it.
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, currentTarget.position, doorSpeed * Time.fixedDeltaTime);
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, currentTarget.position, doorSpeed * Time.deltaTime);
         transform.position = newPosition;
     }
 }
