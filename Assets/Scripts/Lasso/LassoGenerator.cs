@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using FirstGearGames.SmoothCameraShaker;
 
 public class LassoGenerator : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class LassoGenerator : MonoBehaviour
     private float minDrawDistance;
     private bool canLasso;
     [SerializeField] private Animator playerAnimator;
+    public ShakeData minorShake;
+    public ShakeData abruptShake;
 
     // Assign these in the Inspector
     [Header("Audio Sources")]
@@ -80,6 +83,7 @@ public class LassoGenerator : MonoBehaviour
             loopingSource.clip = loopingLasso;
             loopingSource.volume = 0f;
             loopingSource.Play();
+            CameraShakerHandler.Shake(minorShake);
             loopingSource.DOFade(1f, 0.25f); // fade in over 0.25 seconds
         }
         if (Input.GetMouseButtonUp(0))
@@ -88,6 +92,7 @@ public class LassoGenerator : MonoBehaviour
             playerAnimator.SetBool("isLasso", canLasso);
 
             DetectLoop();
+            CameraShakerHandler.Stop();
 
             activeLasso = null;
             loopingSource.DOFade(0f, 0.5f).OnComplete(() => loopingSource.Stop());
@@ -141,7 +146,7 @@ public class LassoGenerator : MonoBehaviour
     {
         Debug.Log("Closed loop detected!");
         oneShotSource.PlayOneShot(loopSucceed);
-
+        CameraShakerHandler.Shake(abruptShake);
         // Find every object with a detectable tag
         DetectableObject[] detectableObjects = FindObjectsByType<DetectableObject>(FindObjectsSortMode.None);
         foreach (DetectableObject detectableObject in detectableObjects)

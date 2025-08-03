@@ -307,6 +307,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: ca0af49d8ce7f1244b30decab4d44d7e, type: 3}
     - target: {fileID: 3093311835157117126, guid: c5fd13c305ce0a7408bf83402f831777, type: 3}
+      propertyPath: minorShake
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d31c8a200c554a47bd6cbdd6b17cff7, type: 2}
+    - target: {fileID: 3093311835157117126, guid: c5fd13c305ce0a7408bf83402f831777, type: 3}
+      propertyPath: abruptShake
+      value: 
+      objectReference: {fileID: 11400000, guid: c799db861cc1e83418748086d239c6d7, type: 2}
+    - target: {fileID: 3093311835157117126, guid: c5fd13c305ce0a7408bf83402f831777, type: 3}
       propertyPath: loopSucceed
       value: 
       objectReference: {fileID: 8300000, guid: e0435f770a5cbbf4aba5a88b47acb558, type: 3}
