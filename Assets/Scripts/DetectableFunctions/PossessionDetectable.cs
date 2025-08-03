@@ -6,6 +6,8 @@ public class PossessionDetectable : DetectableObject
 {
     [SerializeField] private float speed;
     public Rigidbody2D rb;
+    private float defaultGrav = 0f;
+    private float possessedGrav = 0f;
 
     private float horizontalInput;
     private float verticalInput;
@@ -27,7 +29,8 @@ public class PossessionDetectable : DetectableObject
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        //rb.bodyType = RigidbodyType2D.Dynamic;
+        defaultGrav = rb.gravityScale;
         speed = 5f;
 
         if(spriteRenderer == null)
@@ -52,7 +55,8 @@ public class PossessionDetectable : DetectableObject
                     obj.isPossessed = false;
                     virtualCamera.Follow = player.transform;
                     StartCoroutine(FlashCoroutine(unpossessedColour));
-                    obj.rb.bodyType = RigidbodyType2D.Dynamic;
+                    //obj.rb.bodyType = RigidbodyType2D.Dynamic;
+                    rb.gravityScale = defaultGrav;
                 }
             }
 
@@ -60,7 +64,8 @@ public class PossessionDetectable : DetectableObject
             isPossessed = true;
             virtualCamera.Follow = rb.transform;
             StartCoroutine(FlashCoroutine(possessedColour));
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            //rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = possessedGrav;
 
         }
         else
@@ -68,7 +73,8 @@ public class PossessionDetectable : DetectableObject
             isPossessed = false;
             virtualCamera.Follow = player.transform;
             StartCoroutine(FlashCoroutine(unpossessedColour));
-            rb.bodyType = RigidbodyType2D.Dynamic;
+            //rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = defaultGrav;
         }
     }
 
