@@ -8,9 +8,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [Tooltip("Defining radius around the spawner where enemies can appear")][SerializeField] private float spawnRadius = 10f;
     [Tooltip("Ensure enemies don't spawn on top of each other")][SerializeField] private float minDistanceBetweenEnemies = 2f;
-    [Tooltip("Int for maximum number of enemis that can be alive at once")][SerializeField] private int maxActiveEnemies = 2;
+    [Tooltip("Int for maximum number of enemies that can be alive at once")][SerializeField] private int maxActiveEnemies = 2;
     [Tooltip("A Int for total number of enemies this spawner can create")][SerializeField] private float totalSpawnLimit = 5f;
     [Tooltip("A float for time between each spawn attempt")][SerializeField] private float spawnInterval = 1.5f;
+    [Tooltip("Defines a collider in which if the player is detected, the spawner will start spawning enemies")][SerializeField] private EnemySpawnerDetectionZone playerDetectionZone;
 
     [Header("Enemy Internal Values")]
     [Tooltip("Count down time to next spawn")][SerializeField] private float spawnTimer;
@@ -24,23 +25,26 @@ public class EnemySpawner : MonoBehaviour
     }
     private void Update()
     {
-        for (int i = activeEnemiesList.Count - 1; i>= 0; i--) // counts backwards in activenemieslist
+        if (playerDetectionZone.playerDetected)
         {
-            if (activeEnemiesList[i] == null) // if an enemy was killed and is now null
+            for (int i = activeEnemiesList.Count - 1; i >= 0; i--) // counts backwards in activenemieslist
             {
-                activeEnemiesList.RemoveAt(i); // remove this enemy
-            }
-        }
-        spawnTimer -= Time.deltaTime;
-
-        if(spawnTimer <= 0)
-        {
-            spawnTimer = spawnInterval;
-            if(activeEnemiesList.Count < maxActiveEnemies) // if list of active enemies less than max active enemies
-            {
-                if(totalEnemiesSpawned < totalSpawnLimit) // if total enemies spawned less than max enemies spawnable
+                if (activeEnemiesList[i] == null) // if an enemy was killed and is now null
                 {
-                    SpawnEnemy(); // spawn enemy
+                    activeEnemiesList.RemoveAt(i); // remove this enemy
+                }
+            }
+            spawnTimer -= Time.deltaTime;
+
+            if (spawnTimer <= 0)
+            {
+                spawnTimer = spawnInterval;
+                if (activeEnemiesList.Count < maxActiveEnemies) // if list of active enemies less than max active enemies
+                {
+                    if (totalEnemiesSpawned < totalSpawnLimit) // if total enemies spawned less than max enemies spawnable
+                    {
+                        SpawnEnemy(); // spawn enemy
+                    }
                 }
             }
         }
@@ -98,6 +102,8 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+
+    
 
     private void DestroySpawner()
     {
